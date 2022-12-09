@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 127.0.0.1",
     "build": "run-p tsc build-only",
     "build-only": "vite build",
     "preview": "vite preview",
@@ -22,7 +22,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
-    "react-router-dom": "^6.4.4"
+    "react-router-dom": "^6.4.4",
+    "swr": "^2.0.0"
   },
   "devDependencies": {
     "@tsconfig/vite-react": "^1.0.1",

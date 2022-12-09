@@ -23,13 +23,13 @@ export const SidebarProvider = ({
   children: React.ReactNode
 }): JSX.Element => {
   const disclosure = useDisclosure({
-    defaultIsOpen: localStorage.getItem('sidebar-open') === 'yes',
-    onOpen () {
-      localStorage.setItem('sidebar-open', 'yes')
-    },
-    onClose () {
-      localStorage.removeItem('sidebar-open')
-    }
+    // defaultIsOpen: localStorage.getItem('sidebar-open') === 'yes',
+    // onOpen () {
+    //   localStorage.setItem('sidebar-open', 'yes')
+    // },
+    // onClose () {
+    //   localStorage.removeItem('sidebar-open')
+    // }
   })
 
   return (

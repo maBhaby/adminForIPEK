@@ -1,5 +1,5 @@
-import useAuth from '@/hooks/useAuth'
 import { User } from '@/models'
+import client from '@/utils/client'
 import {
   FormControl,
   FormLabel,
@@ -11,44 +11,19 @@ import {
   useColorMode
 } from '@chakra-ui/react'
 import { TbSun, TbMoon } from 'react-icons/tb'
-import { ActionFunctionArgs, Form, redirect, useLocation, useNavigate } from 'react-router-dom'
-import client from '@/utils/client'
-import React, { ChangeEvent, FormEvent } from 'react'
-import { AuthContextType } from '@/context/AuthContext'
+import { ActionFunctionArgs, Form, redirect } from 'react-router-dom'
 
-export const loginAction = (auth: AuthContextType) => async ({
-  request,
-  params
-}: ActionFunctionArgs) => {
+export const loginAction = () => async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData()
-  await auth.login(formData)
-  // console.log(auth.user)
-  // return redirect('/')
-  return null
+  await client.post('login', {
+    body: formData
+  }).json<User>()
+
+  return redirect('/')
 }
 
 export default function LoginPage (): JSX.Element {
   const { colorMode, toggleColorMode } = useColorMode()
-
-  const location = useLocation()
-  const navigate = useNavigate()
-  const auth = useAuth()
-
-  const from = location.state?.from?.pathname || '/'
-
-  // async function handleSubmit (event: FormEvent<HTMLFormElement>): Promise<void> {
-  //   event.preventDefault()
-
-  //   const form = new FormData(event.currentTarget)
-
-  //   await client.post('login', {
-  //     body: form
-  //   })
-
-  //   await auth.login(form.email)
-
-  //   navigate(from)
-  // }
 
   return (
     <Form method="post">

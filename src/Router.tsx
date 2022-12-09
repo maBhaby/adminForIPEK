@@ -1,28 +1,21 @@
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/layout/Layout'
-import { AuthProvider } from './context/AuthContext'
+import { SidebarProvider } from './context/SidebarContext'
 import RequireAuth from './hoc/RequireAuth'
-import useAuth from './hooks/useAuth'
 import DashboardPage from './pages/DashboardPage'
 import LoginPage, { loginAction } from './pages/LoginPage'
 import ProductsPage from './pages/Products'
 
 export default function Router (): JSX.Element {
-  const auth = useAuth()
-
   const router = createBrowserRouter([
     {
       path: '/login',
       element: <LoginPage />,
-      action: loginAction(auth)
+      action: loginAction()
     },
     {
       path: '/',
-      element: (
-            <RequireAuth>
-              <Layout />
-            </RequireAuth>
-      ),
+      element: <RequireAuth><SidebarProvider><Layout /></SidebarProvider></RequireAuth>,
       children: [
         {
           path: '/',
