@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { ROUTER_PATH } from '../../utils/const'
+import { ROUTER_PATH } from '@/utils/const'
 import { Main, ErrorPage } from '@/pages'
 import Layouts from '@/layouts'
-import Auth from '../Auth'
+import Auth from '@/components/Auth'
 
 const Routes: FC = () => {
   const router = createBrowserRouter([

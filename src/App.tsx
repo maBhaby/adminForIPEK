@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import Routes from './components/Routes'
+import Routes from '@/components/Routes'
 
 const App: FC = () => {
   return (

@@ -5,7 +5,7 @@ import {
   Stack,
   Button
 } from '@chakra-ui/react'
-import Input from '../Input'
+import Input from '@/views/Input'
 
 const Auth: FC<FormikValues> = ({ formik }) => {
   const { values, handleChange, handleBlur, handleSubmit, errors, touched } = formik

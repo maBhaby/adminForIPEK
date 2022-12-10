@@ -1,4 +1,4 @@
-import ErrorPage from './ErrorPage'
-import Main from './Main'
+import ErrorPage from '@/pages/ErrorPage'
+import Main from '@/pages/Main'
 
 export { ErrorPage, Main }
