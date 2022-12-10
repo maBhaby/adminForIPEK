@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ROUTER_PATH } from '../../utils/const'
 import { Main, ErrorPage } from '@/pages'

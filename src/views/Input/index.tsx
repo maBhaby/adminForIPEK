@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { FormControl, FormLabel, Input, FormErrorMessage } from '@chakra-ui/react'
 
 interface IInput {
@@ -6,7 +6,7 @@ interface IInput {
   label?: string
   touched: boolean
   onChange: () => void
-  onBlur:() => void
+  onBlur: () => void
   value: string
   name: string
   type: string
