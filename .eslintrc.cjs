@@ -25,5 +25,11 @@ module.exports = {
       './tsconfig.json',
       './tsconfig.node.json'
     ]
+  },
+  rules: {
+    'padding-line-between-statements': [
+      'error',
+      { blankLine: 'always', prev: '*', next: 'export' }
+    ]
   }
 }

@@ -6,4 +6,5 @@ const App: FC = () => {
     <Routes />
   )
 }
+
 export default App
