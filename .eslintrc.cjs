@@ -5,9 +5,10 @@ module.exports = {
     node: true
   },
   extends: [
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'standard-with-typescript'
+    'standard-with-typescript',
+    'standard-jsx',
+    'standard-react',
+    'plugin:react/jsx-runtime'
   ],
   settings: {
     react: {
