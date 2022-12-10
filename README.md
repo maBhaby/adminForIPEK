@@ -1,11 +1,10 @@
-# Garpix frontend Empty Template
+# VCSSN-ADMIN
 
 - Для сборки используется [Vite](https://vitejs.dev)
 - Пакетный менеджер yarn
 - nodejs 14.17 или выше
 - Нет SSR
 
-Можно использовать, когда нужно сделать виджет или нет требований к SEO
 
 ## Быстрый старт
 
