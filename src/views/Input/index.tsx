@@ -4,23 +4,26 @@ import { FormControl, FormLabel, Input, FormErrorMessage } from '@chakra-ui/reac
 interface IInput {
   error?: string
   label?: string
+  touched: boolean
   onChange: () => void
+  onBlur:() => void
   value: string
   name: string
   type: string
 }
 
-const CustomInput: FC<IInput> = ({ error, label, onChange, value, name, type }) => {
+const CustomInput: FC<IInput> = ({ error, label, onChange, onBlur, value, name, type, touched }) => {
   return (
-    <FormControl isInvalid={Boolean(error)}>
+    <FormControl isInvalid={Boolean(error) && touched}>
       {Boolean(label) && <FormLabel>{label}</FormLabel>}
       <Input
+        onBlur={onBlur}
         name={name}
         onChange={onChange}
         value={value}
         type={type}
       />
-      {Boolean(error) && <FormErrorMessage>{error}</FormErrorMessage>}
+      {touched && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   )
 }

@@ -8,7 +8,7 @@ import {
 import Input from '../Input'
 
 const Auth: FC<FormikValues> = ({ formik }) => {
-  const { values, handleChange, handleSubmit, errors } = formik
+  const { values, handleChange, handleBlur, handleSubmit, errors, touched } = formik
 
   useEffect(() => {
     console.log(formik)
@@ -22,7 +22,9 @@ const Auth: FC<FormikValues> = ({ formik }) => {
             name='userName'
             label='user name'
             onChange={handleChange}
+            onBlur={handleBlur}
             error={errors.userName}
+            touched={touched.userName}
             type='text'
             value={values.userName}
           />
@@ -30,8 +32,10 @@ const Auth: FC<FormikValues> = ({ formik }) => {
             name='password'
             onChange={handleChange}
             error={errors.password}
+            onBlur={handleBlur}
             label='password'
             type='password'
+            touched={touched.password}
             value={values.password}
           />
           <Checkbox name='rememder'>Запомнить меня</Checkbox>
