@@ -1,4 +1,4 @@
-export const ROUTER_PATH = {
+export const ROUTER_PATHS = {
   MAIN: '/',
   AUTH: '/login'
 }
