@@ -3,11 +3,7 @@
     "composite": true,
     "module": "ESNext",
     "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true,
-    "strictNullChecks": true
+    "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "vite.config.ts",
-    ".eslintrc.cjs"
-  ]
+  "include": ["vite.config.ts"]
 }
