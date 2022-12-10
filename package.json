@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prepare": "husky install",
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "ts-standard",

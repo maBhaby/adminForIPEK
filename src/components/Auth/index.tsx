@@ -1,15 +1,17 @@
 import React, { FC } from 'react'
 import AuthView from '@/views/Auth'
 import { useFormik } from 'formik'
+import { loginSchema } from '@/utils/schems/LoginShema'
 
 const Auth: FC = () => {
   const formik = useFormik({
     initialValues: {
       userName: '',
-      passWord: ''
+      password: ''
     },
-    onSubmit: (values) => {
-      setTimeout(() => console.log('first'), 2000)
+    validationSchema: loginSchema,
+    onSubmit: (e) => {
+      console.log(e)
     }
   })
   return <AuthView formik={formik} />

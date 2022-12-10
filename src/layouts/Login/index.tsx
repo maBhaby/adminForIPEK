@@ -8,8 +8,6 @@ const Login: FC<ILayout> = ({ children }) => {
       h='100vh'
       w='100vw'
       justifyContent='center'
-      alignItems='center'
-      backgroundColor='#71788794'
     >
       {children}
     </Flex>
