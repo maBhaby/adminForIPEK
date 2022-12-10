@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 import { FormControl, FormLabel, Input, FormErrorMessage } from '@chakra-ui/react'
 
 interface IInput {
-  error?: string | boolean
-  label?: string | boolean
+  error?: string
+  label?: string
   onChange: () => void
   value: string
   name: string
