@@ -5,5 +5,5 @@ export const ROUTER_PATH = {
 
 export const BASIC_COLOR = {
   WHITE: '#FFF',
-  WHITE_IVORY:'#FFFFF0'
+  WHITE_IVORY: '#FFFFF0'
 }
