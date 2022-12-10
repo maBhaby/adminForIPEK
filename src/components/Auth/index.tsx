@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import AuthView from '@/views/Auth'
 import { useFormik } from 'formik'
-import { loginSchema } from '@/utils/schems/LoginShema'
+import { loginSchema } from '@/utils/schemas/login-schema'
 
 const Auth: FC = () => {
   const formik = useFormik({
