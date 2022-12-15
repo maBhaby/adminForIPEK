@@ -1,9 +1,14 @@
-class Api {
-  BASE_API: string | null = ''
+/* eslint-disable */
+import axios from 'axios'
 
-  constructor (url: string) {
-    this.BASE_API = url
-  }
-}
+export const $api = axios.create({
+  withCredentials: true,
+  baseURL: 'https://vcssn-staging.laont.me'
+})
 
-export default Api
+$api.interceptors.request.use((config) => {
+  config.headers!.Authorization = `Bearer ${localStorage.getItem('access_token')}`
+  return config
+})
+
+export default $api
