@@ -3,6 +3,9 @@ import React from 'react'
 export interface IUser {
   email: string
   name: string
+  device: string
+  roles: string[]
+  permissions: string[]
 }
 
 export interface IInitValUser {
@@ -12,4 +15,9 @@ export interface IInitValUser {
 
 export interface ILayout {
   children: React.ReactNode | React.ReactElement
+}
+
+export interface AuthResponse {
+  accessToken: string
+  data: IUser
 }

@@ -14,7 +14,7 @@ interface IInput {
 
 const CustomInput: FC<IInput> = ({ error, label, onChange, onBlur, value, name, type, touched }) => {
   return (
-    <FormControl isInvalid={Boolean(error) && touched}>
+    <FormControl position='relative' isInvalid={Boolean(error) && touched}>
       {Boolean(label) && <FormLabel>{label}</FormLabel>}
       <Input
         onBlur={onBlur}
@@ -23,7 +23,7 @@ const CustomInput: FC<IInput> = ({ error, label, onChange, onBlur, value, name, 
         value={value}
         type={type}
       />
-      {touched && <FormErrorMessage>{error}</FormErrorMessage>}
+      {touched && <FormErrorMessage position='absolute' left='0' bottom='-20px'>{error}</FormErrorMessage>}
     </FormControl>
   )
 }

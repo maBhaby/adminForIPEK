@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { FormikValues } from 'formik'
 import {
   Checkbox,
@@ -10,14 +10,10 @@ import Input from '@/views/Input'
 const Auth: FC<FormikValues> = ({ formik }) => {
   const { values, handleChange, handleBlur, handleSubmit, errors, touched } = formik
 
-  useEffect(() => {
-    console.log(formik)
-  }, [formik])
-
   return (
-    <form onSubmit={handleSubmit}>
-      <Stack spacing={8} mx='auto' maxW='lg' py={12} px={6}>
-        <Stack spacing={4}>
+    <form style={{ width: '100%' }} onSubmit={handleSubmit}>
+      <Stack spacing={8} mx='auto' w='100%' maxW='lg' py={12} px={6}>
+        <Stack spacing={6}>
           <Input
             name='userName'
             label='user name'

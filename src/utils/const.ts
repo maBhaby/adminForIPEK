@@ -1,5 +1,6 @@
 export const ROUTER_PATHS = {
   MAIN: '/',
+  DASHBOARD: '/dashboard',
   AUTH: '/login'
 }
 

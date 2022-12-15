@@ -1,8 +1,11 @@
 import { FC } from 'react'
+import Layouts from '@/layouts'
 
 const Main: FC = () => {
   return (
-    <div>Main</div>
+    <Layouts.Main>
+      <div>s</div>
+    </Layouts.Main>
   )
 }
 

@@ -10,7 +10,11 @@ const Routes: FC = () => {
     {
       path: ROUTER_PATHS.MAIN,
       element: <Main />,
-      errorElement: <ErrorPage />
+      errorElement: <ErrorPage />,
+      children: [{
+        path: ROUTER_PATHS.DASHBOARD,
+        element: (<div>swag</div>)
+      }]
     },
     {
       path: ROUTER_PATHS.AUTH,
