@@ -4,6 +4,7 @@ import { ROUTER_PATHS } from '@/utils/const'
 import { Main, ErrorPage } from '@/pages'
 import Layouts from '@/layouts'
 import Auth from '@/components/Auth'
+import Statistics from '../Statistics'
 
 const Routes: FC = () => {
   const router = createBrowserRouter([
@@ -14,7 +15,7 @@ const Routes: FC = () => {
       children: [
         {
           index: true,
-          element: (<div>swag</div>)
+          element: (<Statistics />)
         },
         {
           path: ROUTER_PATHS.USERS,
