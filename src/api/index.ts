@@ -1,14 +1,19 @@
 /* eslint-disable */
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
-export const $api = axios.create({
-  withCredentials: true,
-  baseURL: 'https://vcssn-staging.laont.me'
+const $api = axios.create({
+  baseURL: 'https://vcssn-staging.laont.me/'
 })
+
 
 $api.interceptors.request.use((config) => {
-  config.headers!.Authorization = `Bearer ${localStorage.getItem('access_token')}`
+  const token = Cookies.get('token')
+  if (token) {
+    config.headers!.Authorization = `Bearer ${token}`
+  }
   return config
-})
+})  
 
-export default $api
+export {$api}
+

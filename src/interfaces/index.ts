@@ -17,7 +17,12 @@ export interface ILayout {
   children: React.ReactNode | React.ReactElement
 }
 
-export interface AuthResponse {
-  accessToken: string
-  data: IUser
+export interface IUserData {
+  data: {
+    device?: string
+    email: string
+    name: string
+    permissions?: string[]
+    roles?: string[]
+  }
 }

@@ -1,6 +1,6 @@
 import { $api } from '@/api'
 import { AxiosResponse } from 'axios'
-import { AuthResponse } from '@/interfaces'
+import { IUserData } from '@/interfaces'
 
 export default class AuthApiService {
   lint: string = ''
@@ -8,7 +8,16 @@ export default class AuthApiService {
     this.lint = lintEx
   }
 
-  static async login (email: string, password: string): Promise<AxiosResponse> {
-    return await $api.post<AuthResponse>('/api/v2/login', { email, password })
+  static async login (email: string, password: string): Promise<AxiosResponse<string>> {
+    return await $api.post<string>('api/v2/auth/login', { email, password })
+  }
+
+  // todo:нормальный тип
+  static async userData (): Promise<AxiosResponse> {
+    return await $api.get<IUserData>('api/v2/auth/me')
+  }
+
+  static async logout (): Promise<AxiosResponse> {
+    return await $api.post('api/v2/auth/logout')
   }
 }
