@@ -3,9 +3,7 @@ import Layouts from '@/layouts'
 
 const Main: FC = () => {
   return (
-    <Layouts.Main>
-      <div>s</div>
-    </Layouts.Main>
+    <Layouts.Main />
   )
 }
 

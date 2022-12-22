@@ -11,10 +11,20 @@ const Routes: FC = () => {
       path: ROUTER_PATHS.MAIN,
       element: <Main />,
       errorElement: <ErrorPage />,
-      children: [{
-        path: ROUTER_PATHS.DASHBOARD,
-        element: (<div>swag</div>)
-      }]
+      children: [
+        {
+          index: true,
+          element: (<div>swag</div>)
+        },
+        {
+          path: ROUTER_PATHS.USERS,
+          element: (<div>users</div>)
+        },
+        {
+          path: ROUTER_PATHS.CONTROL,
+          element: (<div>contols</div>)
+        }
+      ]
     },
     {
       path: ROUTER_PATHS.AUTH,

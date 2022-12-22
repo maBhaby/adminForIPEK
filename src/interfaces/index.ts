@@ -14,7 +14,7 @@ export interface IInitValUser {
 }
 
 export interface ILayout {
-  children: React.ReactNode | React.ReactElement
+  children?: React.ReactNode | React.ReactElement
 }
 
 export interface IUserData {
