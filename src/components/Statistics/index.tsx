@@ -11,7 +11,7 @@ const data = [
 
 const Statistics: FC = () => {
   return (
-    <Box w={500}>
+    <Box w={400}>
       <VictoryChart
         domainPadding={20}
         theme={VictoryTheme.material}
