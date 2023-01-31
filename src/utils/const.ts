@@ -1,5 +1,6 @@
 export const ROUTER_PATHS = {
   MAIN: '/',
+  PRODUCTS_EDIT: '/products/:id',
   DASHBOARD: '/dashboard',
   AUTH: '/login',
   USERS: 'users',

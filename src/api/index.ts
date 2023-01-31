@@ -3,17 +3,18 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 const $api = axios.create({
-  baseURL: 'https://vcssn-staging.laont.me/'
+  baseURL: 'https://vcssn-develop.laont.me'
 })
 
 
 $api.interceptors.request.use((config) => {
   const token = Cookies.get('token')
+  console.log(token)
   if (token) {
     config.headers!.Authorization = `Bearer ${token}`
   }
   return config
 })  
 
-export {$api}
+export { $api }
 

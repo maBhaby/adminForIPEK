@@ -23,6 +23,10 @@ const Routes: FC = () => {
           element: (<div>users</div>)
         },
         {
+          path: ROUTER_PATHS.PRODUCTS_EDIT,
+          element: <div>s</div>
+        },
+        {
           path: ROUTER_PATHS.CONTROL,
           element: (<div>contols</div>)
         }
