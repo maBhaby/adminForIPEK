@@ -16,10 +16,10 @@ import { IProduct } from '@/api/services/Product/interface'
 
 interface IProductsVew {
   products: IProduct[] | undefined
+  redirectToEditPage: (id: number) => void
 }
 
-const Products: FC<IProductsVew> = ({ products }) => {
-  console.log(products)
+const Products: FC<IProductsVew> = ({ products, redirectToEditPage }) => {
   return (
     <Box p='30px' borderRadius='15px' boxShadow='xl'>
       <Text pb='20px' fontSize='xl'>Authors Table</Text>
@@ -35,7 +35,7 @@ const Products: FC<IProductsVew> = ({ products }) => {
           </Tr>
         </Thead>
         <Tbody>
-          {products?.map(({ title, status, prices, collection }, i) => {
+          {products?.map(({ id, title, status, prices, collection }, i) => {
             return (
               <Tr key={i}>
                 <Td>
@@ -46,7 +46,7 @@ const Products: FC<IProductsVew> = ({ products }) => {
                 </Td>
                 <Td>{prices.at(1)?.price}</Td>
                 <Td>{collection.title}</Td>
-                <Td textAlign='end'><Button>asd</Button></Td>
+                <Td textAlign='end'><Button onClick={() => redirectToEditPage(id)}>edit</Button></Td>
               </Tr>
             )
           })}

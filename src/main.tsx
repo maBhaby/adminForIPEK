@@ -13,7 +13,11 @@ const theme = extendTheme({
 })
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <SWRConfig>
+  <SWRConfig
+    value={{
+      revalidateOnFocus: false
+    }}
+  >
     <ChakraProvider theme={theme}>
       <App />
     </ChakraProvider>

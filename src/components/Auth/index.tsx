@@ -18,7 +18,7 @@ const Auth: FC = observer(() => {
     onSubmit: (e) => {
       const { userName, password } = formik.values
       userStore.login(userName, password)
-        .then(() => navigate(ROUTER_PATHS.DASHBOARD, { replace: true }))
+        .then(() => navigate(ROUTER_PATHS.MAIN, { replace: true }))
         .catch((e) => { console.log(e) })
     }
   })

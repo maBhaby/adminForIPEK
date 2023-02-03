@@ -9,11 +9,11 @@ export default class ProductApiService {
   }
 
   static async getProducts (): Promise<AxiosResponse<IProducts>> {
-    return await $api.get('/api/v2/product')
+    return await $api.get('/api/v2/product/')
   }
 
   // todo:нормальный тип
-  static async getProduct (idProduct: number): Promise<AxiosResponse<IProduct>> {
-    return await $api.get(`/api/v2/product/${idProduct}`)
+  static async getProduct (idProduct: string): Promise<AxiosResponse<IProduct>> {
+    return await $api.get(idProduct)
   }
 }

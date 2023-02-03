@@ -11,7 +11,7 @@ const Links = [
   },
   {
     title: 'Пользователи',
-    rout: ROUTER_PATHS.USERS
+    rout: ROUTER_PATHS.PRODUCTS
   },
   {
     title: 'Управление',

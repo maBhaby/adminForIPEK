@@ -1,11 +1,10 @@
 import { FC } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ROUTER_PATHS } from '@/utils/const'
-import { Main, ErrorPage } from '@/pages'
+import { Main, ErrorPage, EditProduct } from '@/pages'
 import Layouts from '@/layouts'
 import Auth from '@/components/Auth'
 import Products from '../Products'
-// import Statistics from '../Statistics'
 
 const Routes: FC = () => {
   const router = createBrowserRouter([
@@ -16,15 +15,15 @@ const Routes: FC = () => {
       children: [
         {
           index: true,
+          element: (<div>ses</div>)
+        },
+        {
+          path: ROUTER_PATHS.PRODUCTS,
           element: (<Products />)
         },
         {
-          path: ROUTER_PATHS.USERS,
-          element: (<div>users</div>)
-        },
-        {
-          path: ROUTER_PATHS.PRODUCTS_EDIT,
-          element: <div>s</div>
+          path: ROUTER_PATHS.PRODUCT_EDIT,
+          element: (<EditProduct />)
         },
         {
           path: ROUTER_PATHS.CONTROL,
