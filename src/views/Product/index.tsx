@@ -82,7 +82,7 @@ const Product: FC<IProductView> = ({ formikTools }) => {
               validateOnChange={false}
               render={arrayHelpers => (
                 <Box display='flex' alignItems='center' gap='20px' justifyContent='space-between'>
-                  {values.size.map((_: any, i: number) => (
+                  {values.size.map((_: any, i: number) => ( // поправить
                     <Fragment key={i}>
                       <Field
                         name={`size[${i}].count`}
