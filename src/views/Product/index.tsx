@@ -1,5 +1,5 @@
-import { FC, Fragment } from 'react'
-import { Grid, Text, Box, Flex, GridItem, Button } from '@chakra-ui/react'
+import { FC } from 'react'
+import { Grid, Text, Box, Flex, GridItem, Button, Input as CInput } from '@chakra-ui/react'
 import { FieldArray, Field, Form, FormikValues } from 'formik'
 import { Link } from 'react-router-dom'
 import SelectView from '../SelectView'
@@ -82,13 +82,15 @@ const Product: FC<IProductView> = ({ formikTools }) => {
               validateOnChange={false}
               render={arrayHelpers => (
                 <Box display='flex' alignItems='center' gap='20px' justifyContent='space-between'>
-                  {values.size.map((_: any, i: number) => ( // TODO: поправить
-                    <Fragment key={i}>
+                  {values.size.map((el: any, i: number) => ( // TODO: поправить + норм инпуты
+                    <Flex direction='column' key={i}>
+                      <Text ml='3px'>{el.title}</Text>
                       <Field
+                        as={CInput}
                         name={`size[${i}].count`}
                         type='number'
                       />
-                    </Fragment>
+                    </Flex>
                   ))}
                 </Box>
               )}
