@@ -1,10 +1,11 @@
 import { FC } from 'react'
 import { FormControl, FormLabel, Input, FormErrorMessage } from '@chakra-ui/react'
+import { BASIC_COLOR } from '@/utils/const'
 
-interface IInput {
+export interface IInput {
   error?: string
   label?: string
-  touched: boolean
+  touched?: boolean
   onChange: () => void
   onBlur: () => void
   value: string
@@ -22,8 +23,9 @@ const CustomInput: FC<IInput> = ({ error, label, onChange, onBlur, value, name, 
         onChange={onChange}
         value={value}
         type={type}
+        bg={BASIC_COLOR.WHITE}
       />
-      {touched && <FormErrorMessage position='absolute' left='0' bottom='-20px'>{error}</FormErrorMessage>}
+      {Boolean(touched) && <FormErrorMessage position='absolute' left='0' bottom='-20px'>{error}</FormErrorMessage>}
     </FormControl>
   )
 }
