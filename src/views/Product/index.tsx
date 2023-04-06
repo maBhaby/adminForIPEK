@@ -1,5 +1,13 @@
 import { FC } from 'react'
-import { Grid, Text, Box, Flex, GridItem, Button, Input as CInput } from '@chakra-ui/react'
+import {
+  Grid,
+  Text,
+  Box,
+  Flex,
+  GridItem,
+  Button,
+  Input as CInput
+} from '@chakra-ui/react'
 import { FieldArray, Field, Form, FormikValues } from 'formik'
 import { Link } from 'react-router-dom'
 import SelectView from '../SelectView'
@@ -17,6 +25,7 @@ const Product: FC<IProductView> = ({ formikTools }) => {
   console.log(formikTools)
   const inputs = [
     {
+      title: 'Название',
       name: 'title',
       value: values.title,
       type: 'text',
@@ -24,11 +33,20 @@ const Product: FC<IProductView> = ({ formikTools }) => {
       touched: touched.title
     },
     {
+      title: 'Слаг',
       name: 'slug',
       value: values.slug,
       type: 'text',
       error: errors.slug,
       touched: touched.slug
+    },
+    {
+      title: 'Название коллекции',
+      name: 'collection.title',
+      value: values.collection.title,
+      type: 'text',
+      error: errors.collection?.title,
+      touched: touched.collection?.title
     }
   ]
 
@@ -59,42 +77,56 @@ const Product: FC<IProductView> = ({ formikTools }) => {
             bg={BASIC_COLOR.WHITE}
             display='grid'
             gap='20px'
-            gridTemplateColumns='1fr 1fr'
+            gridTemplateRows='1fr'
             padding='25px'
             boxShadow='xl'
             borderRadius='15px'
           >
-            {inputs.map(({ name, value, type, error, touched }, i) => (
-              <Input
-                key={i}
-                label={name}
-                name={name}
-                value={value}
-                type={type}
-                onBlur={handleBlur}
-                error={error}
-                touched={touched}
-                onChange={handleChange}
+            <Box>
+              {inputs.map(({ title, name, value, type, error, touched }, i) => (
+                <Input
+                  key={i}
+                  label={title}
+                  name={name}
+                  value={value}
+                  type={type}
+                  onBlur={handleBlur}
+                  error={error}
+                  touched={touched}
+                  onChange={handleChange}
+                />
+              ))}
+            </Box>
+            <Box>
+              <FieldArray
+                name='size'
+                validateOnChange={false}
+                render={(arrayHelpers) => (
+                  <Box
+                    display='flex'
+                    alignItems='center'
+                    gap='20px'
+                    justifyContent='space-between'
+                  >
+                    {values.size.map(
+                      (
+                        el: any,
+                        i: number // TODO: поправить + норм инпуты
+                      ) => (
+                        <Flex direction='column' key={i}>
+                          <Text ml='3px'>{el.title}</Text>
+                          <Field
+                            as={CInput}
+                            name={`size[${i}].count`}
+                            type='number'
+                          />
+                        </Flex>
+                      )
+                    )}
+                  </Box>
+                )}
               />
-            ))}
-            <FieldArray
-              name='size'
-              validateOnChange={false}
-              render={arrayHelpers => (
-                <Box display='flex' alignItems='center' gap='20px' justifyContent='space-between'>
-                  {values.size.map((el: any, i: number) => ( // TODO: поправить + норм инпуты
-                    <Flex direction='column' key={i}>
-                      <Text ml='3px'>{el.title}</Text>
-                      <Field
-                        as={CInput}
-                        name={`size[${i}].count`}
-                        type='number'
-                      />
-                    </Flex>
-                  ))}
-                </Box>
-              )}
-            />
+            </Box>
           </GridItem>
           <GridItem>
             <Box

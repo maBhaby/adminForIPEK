@@ -42,8 +42,8 @@ const Product: FC = () => {
   const { state } = useLocation()
   const id: number = state?.id
 
-  const { data, error, isLoading } = useSWR(`api/v2/product/${id}/`, ProductApiService.getProduct)
-  console.log(setInitialValues, data, error) // убрать
+  const { data, isLoading } = useSWR(`api/v2/product/${id}/`, ProductApiService.getProduct)
+  console.log(setInitialValues, data) // убрать
 
   if (isLoading) {
     return <Loader />

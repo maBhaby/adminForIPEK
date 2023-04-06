@@ -7,16 +7,19 @@ import { useNavigate } from 'react-router-dom'
 import ProductsView from '@/views/Products'
 
 const Products: FC = () => {
-  const { data, error, isLoading } = useSWR('api/products', ProductApiService.getProducts)
+  const { data, isLoading } = useSWR('api/products', ProductApiService.getProducts)
   const redirect = useNavigate()
 
   const redirectToEditPage = (id: number): void => {
     redirect(`${ROUTER_PATHS.PRODUCTS}${id}`, { state: { id } })
   }
 
-  console.log(error, isLoading)
+  console.log(isLoading)
+  if (isLoading) {
+    return <Loader />
+  }
 
-  return (isLoading ? <Loader /> : <ProductsView redirectToEditPage={redirectToEditPage} products={data?.data.data} />)
+  return <ProductsView redirectToEditPage={redirectToEditPage} products={data?.data.data} />
 }
 
 export default Products

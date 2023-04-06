@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ROUTER_PATHS } from '@/utils/const'
+import Statistics from '../Statistics'
 import { Main, ErrorPage, EditProduct } from '@/pages'
 import Layouts from '@/layouts'
 import Auth from '@/components/Auth'
@@ -15,7 +16,7 @@ const Routes: FC = () => {
       children: [
         {
           index: true,
-          element: (<div>ses</div>)
+          element: (<Statistics />)
         },
         {
           path: ROUTER_PATHS.PRODUCTS,
@@ -27,7 +28,7 @@ const Routes: FC = () => {
         },
         {
           path: ROUTER_PATHS.CONTROL,
-          element: (<div>contols</div>)
+          element: (<div>s</div>)
         }
       ]
     },
