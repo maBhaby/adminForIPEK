@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import useSWR from 'swr'
+import { useNavigate } from 'react-router-dom'
 import { studentApiService } from '@/api/services/student'
 import Loader from '@/views/Loader'
 import {
@@ -13,16 +14,18 @@ import {
 } from '@chakra-ui/react'
 
 const Students: FC = () => {
-  console.log(studentApiService.getStudentList())
   const {
     data,
     isLoading
   } = useSWR('api/studentList', studentApiService.getStudentList)
   const students = data?.students
+  const navigate = useNavigate()
 
-  // const redirectToStudent = (id): void => {
+  const redirectToStudentEdit = (id: number): void => {
+    console.log('id', id)
+    navigate(`/student/${id}?id=${id}`, { state: { id } })
+  }
 
-  // }
   if (isLoading) {
     return <Loader />
   }
@@ -37,7 +40,7 @@ const Students: FC = () => {
         </Thead>
         <Tbody>
           {students?.map((el, i) => (
-            <Tr key={i} cursor='pointer'>
+            <Tr key={i} onClick={() => redirectToStudentEdit(el)} cursor='pointer'>
               <Td>{el}: Какой то студент</Td>
             </Tr>
           ))}

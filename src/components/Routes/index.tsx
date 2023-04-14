@@ -2,6 +2,8 @@ import { FC } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ROUTER_PATHS } from '@/utils/const'
 import Statistics from '../Statistics'
+import Group from '../Group'
+import StudentEdit from '../StudentEdit'
 import { Main, ErrorPage, EditProduct } from '@/pages'
 import Layouts from '@/layouts'
 import Auth from '@/components/Auth'
@@ -19,6 +21,10 @@ const Routes: FC = () => {
           element: (<Statistics />)
         },
         {
+          path: ROUTER_PATHS.STUDENT_EDIT,
+          element: (<StudentEdit />)
+        },
+        {
           path: ROUTER_PATHS.PRODUCTS,
           element: (<Products />)
         },
@@ -27,8 +33,8 @@ const Routes: FC = () => {
           element: (<EditProduct />)
         },
         {
-          path: ROUTER_PATHS.CONTROL,
-          element: (<div>s</div>)
+          path: ROUTER_PATHS.GROUP,
+          element: (<Group></Group>)
         }
       ]
     },

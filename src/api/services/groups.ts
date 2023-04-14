@@ -1,34 +1,32 @@
-import BaseApi from '../api'
-import { runtimeConfig } from '@/config'
+import BaseApi from "../api"
+import { runtimeConfig } from "@/config"
 
 interface IGroups {
   students: number[]
 }
 
 class GroupsApiService extends BaseApi {
-  public createStudentList (data: any): void {
-    this.axios.post('api/v1/studentlist/', data)
+  public createStudentList(data: any): void {
+    this.axios
+      .post("api/v1/studentlist/", data)
       .then((data) => console.log(data))
       .catch((data) => console.log(data))
   }
 
-  public async getGroupList (): Promise<IGroups | undefined> {
+  public async getGroupList(): Promise<IGroups | undefined> {
     try {
-      const res = await this.axios.get<IGroups>('api/v1/grouplist/')
+      const res = await this.axios.get<IGroups>("api/v1/grouplist/")
       return res.data
     } catch (error) {
       console.log(error)
     }
   }
 
-  public async getGroup (count: number): Promise<IGroups | undefined> {
-    try {
-      const res = await this.axios.get<IGroups>(`api/v1/grouplist/${count}`)
-      return res.data
-    } catch (error) {
-      console.log(error)
-    }
+  public async getGroup(count: number): Promise<IGroups> {
+    debugger
+    const res = await this.axios.get<IGroups>(`api/v1/grouplist/${count}`)
+    return res.data
   }
 }
 
-export const studentApiService = new GroupsApiService(runtimeConfig.URL)
+export const groupsApiService = new GroupsApiService(runtimeConfig.URL)
