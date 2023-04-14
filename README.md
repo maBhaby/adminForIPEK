@@ -1,2 +1,0 @@
-# adminForIPEK
-diplom
