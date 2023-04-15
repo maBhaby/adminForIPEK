@@ -31,12 +31,8 @@ class StudentApiService extends BaseApi {
   }
 
   public getStudentList = async (): Promise<IStudents> => {
-    try {
-      const res = await this.axios.get<IStudents>('api/v1/studentlist/')
-      return res.data
-    } catch (error) {
-      throw (error)
-    }
+    const res = await this.axios.get<IStudents>('api/v1/studentlist/')
+    return res.data
   }
 
   public getStudent = async (id: string): Promise<IStudent> => {
@@ -44,9 +40,14 @@ class StudentApiService extends BaseApi {
     return res.data
   }
 
-  public changeStudent = async (id: number, body:IStudent): Promise<any> => {
+  public changeStudent = async (id: number, body: IStudent): Promise<any> => {
     const res = await this.axios.put(`api/v1/studentlist/${id}`, body)
     return res.data
+  }
+
+  public createStudent = async (body: IStudent): Promise<any> => {
+    const res = await this.axios.post(`api/v1/studentlist/`, body)
+    return res
   }
 }
 

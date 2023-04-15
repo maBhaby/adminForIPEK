@@ -6,8 +6,8 @@ export interface IInput {
   error?: string
   label?: string
   touched?: boolean
-  onChange: (e:ChangeEvent<HTMLInputElement>) => void
-  onBlur: (e:FocusEvent<HTMLInputElement>) => void
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  onBlur: (e: FocusEvent<HTMLInputElement>) => void
   value: string
   name: string
   type: string

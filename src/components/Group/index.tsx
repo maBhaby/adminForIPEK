@@ -1,11 +1,11 @@
-import { FC } from "react"
+import { FC } from 'react'
 import useSWR from 'swr'
-import { groupsApiService } from "@/api/services/groups"
+import { groupsApiService } from '@/api/services/groups'
 
 const Group: FC = () => {
   const { data } = useSWR('1', groupsApiService.getGroup)
   console.log('grops', data)
-  return(
+  return (
     <div>s</div>
   )
 }

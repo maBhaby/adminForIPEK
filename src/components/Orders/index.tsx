@@ -32,7 +32,7 @@ const Orders: FC<OrdersI> = ({ data: orders }) => {
       <Tbody>
         {orders?.map(
           (
-            { id, firstname, lastname, order_num: orderNum, phone, contact },
+            { id, firstname, lastname, order_num: orderNum, phone },
             i
           ) => {
             return (
@@ -46,7 +46,7 @@ const Orders: FC<OrdersI> = ({ data: orders }) => {
                   <Text>{orderNum}</Text>
                 </Td>
                 <Td>{phone}</Td>
-                <Td>{contact || '-'}</Td>
+                <Td>-</Td>
                 <Td textAlign='end'>
                   <Button>show</Button>
                 </Td>

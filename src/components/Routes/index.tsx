@@ -34,7 +34,7 @@ const Routes: FC = () => {
         },
         {
           path: ROUTER_PATHS.GROUP,
-          element: (<Group></Group>)
+          element: (<Group />)
         }
       ]
     },

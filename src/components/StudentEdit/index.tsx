@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { studentApiService, IStudentData } from "@/api/services/student";
 import { useFormik } from "formik";
 import { useLocation } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 import Loader from "@/views/Loader";
-import { Box } from "@chakra-ui/react";
+
 import Input from "@/views/Input";
 import useSWR from "swr";
 
@@ -26,6 +26,9 @@ const StudentEdit: FC = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");
+  const fetcher = id
+    ? studentApiService.changeStudent
+    : studentApiService.createStudent;
 
   const { data, isLoading } = useSWR(
     `api/v1/studentlist/${id}`,
@@ -33,18 +36,24 @@ const StudentEdit: FC = () => {
   );
   const student = data?.student || emptyStudent;
 
+  const submitHandler = async () => {
+    try {
+      const res = await studentApiService.changeStudent(id, value);
+      console.log("value", res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const formikTools = useFormik<IStudentData>({
     initialValues: student,
     enableReinitialize: true,
     onSubmit: (value) => {
-      //or create
-      studentApiService.changeStudent(id, value)
-        .then((res) => {console.log(res)})
-        .catch(((res) => {console.log(res)}))
-      console.log("value", value);
+      submitHandler();
     },
   });
-  const { handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting } = formikTools;
+  const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
+    formikTools;
 
   const formInputs = [
     {
@@ -129,10 +138,11 @@ const StudentEdit: FC = () => {
       error: errors.telephone,
     },
   ];
-  console.log(formikTools);
+
   if (isLoading) {
     return <Loader />;
   }
+
   return (
     <form onSubmit={handleSubmit}>
       <Box>
@@ -148,8 +158,8 @@ const StudentEdit: FC = () => {
             onChange={handleChange}
           />
         ))}
-        <Box display='flex' justifyContent='right' mt='20px'>
-          <Button disabled={isSubmitting} type="submit">Сохранить</Button>
+        <Box display="flex" justifyContent="right" mt="20px">
+          <Button type="submit">Сохранить</Button>
         </Box>
       </Box>
     </form>
