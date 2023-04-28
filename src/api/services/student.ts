@@ -15,12 +15,23 @@ export interface IStudentData {
   year_receipt: string
 }
 
-export interface IStudent {
-  student: IStudentData
+interface createStudent {
+  body: IStudentData
 }
 
-export interface IStudents {
-  students: number[]
+export interface IStudent {
+  student: IStudentData 
+}
+
+interface IStudents {
+  id: number
+  fist_name: string
+  last_name: string
+  patronymic: string
+}
+
+export interface IStudentList {
+  students: IStudents[]
 }
 
 class StudentApiService extends BaseApi {
@@ -30,8 +41,8 @@ class StudentApiService extends BaseApi {
       .catch((data) => console.log(data))
   }
 
-  public getStudentList = async (): Promise<IStudents> => {
-    const res = await this.axios.get<IStudents>('api/v1/studentlist/')
+  public getStudentList = async (): Promise<IStudentList> => {
+    const res = await this.axios.get<IStudentList>('api/v1/studentlist/')
     return res.data
   }
 
@@ -40,12 +51,12 @@ class StudentApiService extends BaseApi {
     return res.data
   }
 
-  public changeStudent = async (id: number, body: IStudent): Promise<any> => {
+  public changeStudent = async ({id: number, body: IStudent}): Promise<any> => {
     const res = await this.axios.put(`api/v1/studentlist/${id}`, body)
     return res.data
   }
 
-  public createStudent = async (body: IStudent): Promise<any> => {
+  public createStudent<createStudent> = async ({ body }): Promise<any> => {
     const res = await this.axios.post(`api/v1/studentlist/`, body)
     return res
   }

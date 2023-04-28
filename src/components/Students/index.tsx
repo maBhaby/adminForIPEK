@@ -39,9 +39,9 @@ const Students: FC = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {students?.map((el, i) => (
-            <Tr key={i} onClick={() => redirectToStudentEdit(el)} cursor='pointer'>
-              <Td>{el}: Какой то студент</Td>
+          {students?.map(({id, fist_name, last_name}) => (
+            <Tr key={id} onClick={() => redirectToStudentEdit(id)} cursor='pointer'>
+              <Td>{fist_name} {last_name}</Td>
             </Tr>
           ))}
         </Tbody>

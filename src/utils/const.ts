@@ -1,10 +1,10 @@
 export const ROUTER_PATHS = {
   MAIN: '/',
   STUDENT_EDIT: '/student/:id',
-  PRODUCTS: '/products/',
+  GROUPS: '/groups/',
+  GROUPS_EDIT: '/groups/:id',
   PRODUCT_EDIT: '/products/:id',
   AUTH: '/login',
-  GROUP: '/group',
   USERS: 'users',
   CONTROL: 'control'
 }

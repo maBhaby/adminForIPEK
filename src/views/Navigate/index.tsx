@@ -11,11 +11,11 @@ const Links = [
   },
   {
     title: 'Товары',
-    rout: ROUTER_PATHS.PRODUCTS
+    rout: ROUTER_PATHS.GROUPS
   },
   {
     title: 'Управление',
-    rout: ROUTER_PATHS.CONTROL
+    rout: ROUTER_PATHS.AUTH
   }
 ]
 
