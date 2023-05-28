@@ -5,7 +5,7 @@ export interface IStudentData {
   birthday: string
   email: string
   fist_name: string
-  id: number
+  id?: number
   last_name: string
   number_personal_file: string
   patronymic: string
@@ -40,12 +40,13 @@ class StudentApiService extends BaseApi {
     return res.data
   }
 
-  public changeStudent = async (id: number, body: IStudent): Promise<any> => {
+  public changeStudent = async (id: number | any, body: IStudent | any): Promise<any> => {
     const res = await this.axios.put(`api/v1/studentlist/${id}`, body)
     return res.data
   }
 
-  public createStudent = async (body: IStudent): Promise<any> => {
+  public createStudent = async (body: IStudent | any): Promise<any> => {
+    debugger
     const res = await this.axios.post(`api/v1/studentlist/`, body)
     return res
   }

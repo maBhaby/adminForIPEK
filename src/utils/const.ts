@@ -5,6 +5,7 @@ export const ROUTER_PATHS = {
   PRODUCT_EDIT: '/products/:id',
   AUTH: '/login',
   GROUP: '/group',
+  GROUP_EDIT: '/group/:id',
   USERS: 'users',
   CONTROL: 'control'
 }
@@ -21,4 +22,37 @@ export const PRODUCT_STATUS = {
   ACTIVE: 'active',
   SOLD: 'soldout',
   COMING: 'comingsoon'
+}
+
+export const GROUP_EDIT_HEADER_DATA = [
+  {
+    id: 0,
+    label: 'ФИО'
+  },
+  {
+    id: 1,
+    label: 'День рождения'
+  },
+  {
+    id: 2,
+    label: 'E-mail'
+  },
+  {
+    id: 3,
+    label: 'Телефон'
+  },
+  {
+    id: 4,
+    label: 'Место регистрации'
+  },
+  {
+    id: 5,
+    label: 'Год поступления'
+  },
+]
+
+export const MODALS_TYPE = {
+  USER_DATA: 'userData',
+  ERROR: 'error',
+  EMPTY: 'empty'
 }

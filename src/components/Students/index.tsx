@@ -10,7 +10,8 @@ import {
   Tr,
   Th,
   Td,
-  TableContainer
+  TableContainer,
+  Button
 } from '@chakra-ui/react'
 
 const Students: FC = () => {
@@ -22,8 +23,10 @@ const Students: FC = () => {
   const navigate = useNavigate()
 
   const redirectToStudentEdit = (id: number): void => {
-    console.log('id', id)
     navigate(`/student/${id}?id=${id}`, { state: { id } })
+  }
+  const redirectToStudentCreate = (id: number): void => {
+    navigate(`/student/create`, { state: { id } })
   }
 
   if (isLoading) {
@@ -36,12 +39,13 @@ const Students: FC = () => {
         <Thead>
           <Tr>
             <Th>Студенты</Th>
+            <Th w='50px'><Button onClick={redirectToStudentCreate}>+</Button></Th>
           </Tr>
         </Thead>
         <Tbody>
-          {students?.map((el, i) => (
-            <Tr key={i} onClick={() => redirectToStudentEdit(el)} cursor='pointer'>
-              <Td>{el}: Какой то студент</Td>
+          {students?.map(({id, fist_name, last_name, }, i) => (
+            <Tr key={id} onClick={() => redirectToStudentEdit(id)} cursor='pointer'>
+              <Td>{fist_name} {last_name}: Какой то студент</Td>
             </Tr>
           ))}
         </Tbody>

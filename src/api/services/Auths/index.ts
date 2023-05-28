@@ -9,7 +9,7 @@ export default class AuthApiService {
   }
 
   static async login (email: string, password: string): Promise<AxiosResponse<string>> {
-    return await $api.post<string>('api/v2/auth/login', { email, password })
+    return await $api.post<string>('/accounts/login/', { email, password })
   }
 
   // todo:нормальный тип

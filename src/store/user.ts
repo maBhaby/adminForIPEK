@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import AuthApiService from '@/api/services/Auth'
+import AuthApiService from '@/api/services/Auths/index'
 import { IUserData } from '@/interfaces'
 import Cookies from 'js-cookie'
 

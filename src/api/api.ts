@@ -8,7 +8,10 @@ export default class BaseApi {
 
   private createHttpInstance (api: string): void {
     this.axios = axios.create({
-      baseURL: api
+      baseURL: api,
+      xsrfCookieName: 'csrftoken',
+      xsrfHeaderName: 'X-CSRFToken',
+      // withCredentials: trueн
     })
   }
 }

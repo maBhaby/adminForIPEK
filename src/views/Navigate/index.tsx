@@ -10,8 +10,8 @@ const Links = [
     rout: ROUTER_PATHS.MAIN
   },
   {
-    title: 'Товары',
-    rout: ROUTER_PATHS.PRODUCTS
+    title: 'Группы',
+    rout: ROUTER_PATHS.GROUP
   },
   {
     title: 'Управление',

@@ -4,7 +4,7 @@ import { ROUTER_PATHS } from '@/utils/const'
 import Statistics from '../Statistics'
 import Group from '../Group'
 import StudentEdit from '../StudentEdit'
-import { Main, ErrorPage, EditProduct } from '@/pages'
+import { Main, ErrorPage, EditProduct, GroupEditPage } from '@/pages'
 import Layouts from '@/layouts'
 import Auth from '@/components/Auth'
 import Products from '../Products'
@@ -35,6 +35,10 @@ const Routes: FC = () => {
         {
           path: ROUTER_PATHS.GROUP,
           element: (<Group />)
+        },
+        {
+          path: ROUTER_PATHS.GROUP_EDIT,
+          element: (<GroupEditPage />)
         }
       ]
     },

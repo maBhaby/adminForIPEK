@@ -15,14 +15,14 @@ const Auth: FC<FormikValues> = ({ formik }) => {
       <Stack spacing={8} mx='auto' w='100%' maxW='lg' py={12} px={6}>
         <Stack spacing={6}>
           <Input
-            name='userName'
+            name='username'
             label='user name'
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.userName}
-            touched={touched.userName}
+            error={errors.username}
+            touched={touched.username}
             type='text'
-            value={values.userName}
+            value={values.username}
           />
           <Input
             name='password'

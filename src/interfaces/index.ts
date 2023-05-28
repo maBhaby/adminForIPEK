@@ -157,3 +157,10 @@ export interface OrdersI {
   links: Links
   meta: Meta
 }
+
+export interface IModalsBase {
+  closeModal: () => void
+  isOpen: boolean
+  modalProps: any
+}
+

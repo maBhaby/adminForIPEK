@@ -23,6 +23,7 @@
     "@types/axios": "^0.14.0",
     "@types/js-cookie": "^3.0.2",
     "axios": "^1.2.1",
+    "dayjs": "^1.11.7",
     "formik": "^2.2.9",
     "framer-motion": "^7.6.19",
     "js-cookie": "^3.0.1",

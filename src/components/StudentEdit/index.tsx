@@ -1,12 +1,15 @@
 import { FC } from "react";
-import { studentApiService, IStudentData } from "@/api/services/student";
+import useSWR from "swr";
 import { useFormik } from "formik";
 import { useLocation } from "react-router-dom";
-import { Button, Box } from "@chakra-ui/react";
-import Loader from "@/views/Loader";
+import { observer } from "mobx-react-lite";
 
-import Input from "@/views/Input";
-import useSWR from "swr";
+import { useStores } from "@/hooks/useStore";
+import { StudentEditShema } from "@/utils/schemas/StudentEdit";
+import { studentApiService, IStudentData } from "@/api/services/student";
+
+import StudentEditView from '@/views/StudentEditView'
+import Loader from "@/views/Loader";
 
 const emptyStudent = {
   birthday: "",
@@ -22,148 +25,55 @@ const emptyStudent = {
   year_receipt: "",
 };
 
-const StudentEdit: FC = () => {
+const StudentEdit: FC = observer(() => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");
-  const fetcher = id
-    ? studentApiService.changeStudent
-    : studentApiService.createStudent;
+  const { ModalStore } = useStores()
+
+  const fetcher = (id: number | null, value: IStudentData) => {
+    if (id) {
+      return studentApiService.changeStudent(id, value)
+    }
+    else {
+      return studentApiService.createStudent(value)
+    }
+  }
+;
 
   const { data, isLoading } = useSWR(
-    `api/v1/studentlist/${id}`,
-    studentApiService.getStudent
+    id ? `api/v1/studentlist/${id}` : null,
+    studentApiService.getStudent 
   );
   const student = data?.student || emptyStudent;
 
-  const submitHandler = async () => {
+  const submitHandler = async (value:IStudentData) => {
     try {
-      const res = await studentApiService.changeStudent(id, value);
-      console.log("value", res);
+      const idNum = id ? +id : null
+      await fetcher(idNum, value);
     } catch (error) {
-      console.log(error);
+      ModalStore.open('error', { error })
     }
   };
 
   const formikTools = useFormik<IStudentData>({
     initialValues: student,
     enableReinitialize: true,
+    validationSchema: StudentEditShema,
     onSubmit: (value) => {
-      submitHandler();
+      submitHandler(value);
     },
   });
-  const { handleChange, handleBlur, handleSubmit, values, touched, errors } =
-    formikTools;
-
-  const formInputs = [
-    {
-      id: 1,
-      label: "Имя",
-      type: "text",
-      name: "fist_name",
-      value: values.fist_name,
-      touched: touched.fist_name,
-      error: errors.fist_name,
-    },
-    {
-      id: 2,
-      label: "фамилия",
-      type: "text",
-      name: "last_name",
-      value: values.last_name,
-      touched: touched.last_name,
-      error: errors.last_name,
-    },
-    {
-      id: 3,
-      label: "email",
-      type: "text",
-      name: "email",
-      value: values.email,
-      touched: touched.email,
-      error: errors.email,
-    },
-    {
-      id: 4,
-      label: "birthday",
-      type: "text",
-      name: "birthday",
-      value: values.birthday,
-      touched: touched.birthday,
-      error: errors.birthday,
-    },
-    {
-      id: 5,
-      label: "patronymic",
-      type: "text",
-      name: "patronymic",
-      value: values.patronymic,
-      touched: touched.patronymic,
-      error: errors.patronymic,
-    },
-    {
-      id: 6,
-      label: "place_registration",
-      type: "text",
-      name: "place_registration",
-      value: values.place_registration,
-      touched: touched.place_registration,
-      error: errors.place_registration,
-    },
-    {
-      id: 7,
-      label: "place_residence",
-      type: "text",
-      name: "place_residence",
-      value: values.place_residence,
-      touched: touched.place_residence,
-      error: errors.place_residence,
-    },
-    {
-      id: 8,
-      label: "year_receipt",
-      type: "text",
-      name: "year_receipt",
-      value: values.year_receipt,
-      touched: touched.year_receipt,
-      error: errors.year_receipt,
-    },
-    {
-      id: 9,
-      label: "telephone",
-      type: "tel",
-      name: "telephone",
-      value: values.telephone,
-      touched: touched.telephone,
-      error: errors.telephone,
-    },
-  ];
 
   if (isLoading) {
     return <Loader />;
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Box>
-        {formInputs.map(({ id, label, type, touched, name, value }) => (
-          <Input
-            key={id}
-            label={label}
-            type={type}
-            touched={touched}
-            name={name}
-            value={value}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-        ))}
-        <Box display="flex" justifyContent="right" mt="20px">
-          <Button type="submit">Сохранить</Button>
-        </Box>
-      </Box>
+    <form onSubmit={formikTools.handleSubmit}>
+      <StudentEditView formikTools={formikTools} />
     </form>
   );
-};
+})
 
 export default StudentEdit;

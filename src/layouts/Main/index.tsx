@@ -1,14 +1,17 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { ILayout } from '@/interfaces'
 import { BASIC_COLOR } from '@/utils/const'
 import { Outlet } from 'react-router-dom'
-import { Flex, Box, Image, Text } from '@chakra-ui/react'
+import { Flex, Box, Image, Text, Button, useDisclosure, Collapse  } from '@chakra-ui/react'
 import Navigate from '@/views/Navigate'
 import { logo } from '@/assets'
 
 const Main: FC<ILayout> = ({ children }) => {
+  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true })
+
   return (
     <Box bg={BASIC_COLOR.BACKGROUND}>
+      <Collapse in={isOpen}>
       <Flex
         position='fixed'
         flexDirection='column'
@@ -34,8 +37,14 @@ const Main: FC<ILayout> = ({ children }) => {
         </Box>
         <Navigate />
       </Flex>
-      <Box minHeight='100vh' p='5' ml='250px'>
-        <Box maxW='1366' m='0 auto'>
+      </Collapse>
+      <Box 
+        minHeight='100vh' 
+        p='5' 
+        ml={isOpen ? '250px' : '0px'}
+      >
+        <Button onClick={onToggle}>Show</Button>
+        <Box  m='0 auto'>
           <Outlet />
         </Box>
       </Box>
