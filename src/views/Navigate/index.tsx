@@ -6,7 +6,7 @@ import { ROUTER_PATHS } from '@/utils/const'
 
 const Links = [
   {
-    title: 'Статисика',
+    title: 'Студенты',
     rout: ROUTER_PATHS.MAIN
   },
   {
@@ -14,8 +14,8 @@ const Links = [
     rout: ROUTER_PATHS.GROUP
   },
   {
-    title: 'Управление',
-    rout: ROUTER_PATHS.CONTROL
+    title: 'Преподаватели',
+    rout: ROUTER_PATHS.COLLEAGUE
   }
 ]
 

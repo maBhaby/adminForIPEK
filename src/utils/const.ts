@@ -7,7 +7,8 @@ export const ROUTER_PATHS = {
   GROUP: '/group',
   GROUP_EDIT: '/group/:id',
   USERS: 'users',
-  CONTROL: 'control'
+  COLLEAGUE: 'colleague',
+  COLLEAGUE_EDIT: 'colleague/:id',
 }
 
 export const BASIC_COLOR = {
@@ -54,5 +55,6 @@ export const GROUP_EDIT_HEADER_DATA = [
 export const MODALS_TYPE = {
   USER_DATA: 'userData',
   ERROR: 'error',
+  NOTIFICATION:'notification',
   EMPTY: 'empty'
 }

@@ -71,7 +71,7 @@ interface IProp {
 }
 
 const StudentEditView: FC<IProp> = ({formikTools}) => {
-  const { handleChange, handleBlur, values, touched, errors } =
+  const { handleChange, handleBlur, values, touched, errors, isSubmitting } =
     formikTools;
   return (
     <>
@@ -130,7 +130,7 @@ const StudentEditView: FC<IProp> = ({formikTools}) => {
         </Box>
       </Box>
       <Box display="flex" justifyContent="right" mt="20px">
-        <Button type="submit">Сохранить</Button>
+        <Button disabled={isSubmitting} type="submit">Сохранить</Button>
       </Box>
     </>
   );

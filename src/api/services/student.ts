@@ -45,6 +45,11 @@ class StudentApiService extends BaseApi {
     return res.data
   }
 
+  public deletStudent = async (id: number | any): Promise<any> => {
+    const res = await this.axios.delete(`api/v1/studentlist/${id}`)
+    return res.data
+  }
+
   public createStudent = async (body: IStudent | any): Promise<any> => {
     debugger
     const res = await this.axios.post(`api/v1/studentlist/`, body)

@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ROUTER_PATHS } from '@/utils/const'
 
-import { Main, ErrorPage, EditProduct, GroupEditPage } from '@/pages'
+import { Main, ErrorPage, EditProduct, GroupEditPage, Colleague, ColleagueEdit } from '@/pages'
 import Statistics from '../Statistics'
 import Group from '../Group'
 import StudentEdit from '../StudentEdit'
@@ -40,6 +40,14 @@ const Routes: FC = () => {
         {
           path: ROUTER_PATHS.GROUP_EDIT,
           element: (<GroupEditPage />)
+        },
+        {
+          path: ROUTER_PATHS.COLLEAGUE,
+          element: (<Colleague />)
+        },
+        {
+          path: ROUTER_PATHS.COLLEAGUE_EDIT,
+          element: (<ColleagueEdit />)
         }
       ]
     },

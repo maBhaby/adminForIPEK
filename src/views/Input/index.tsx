@@ -3,9 +3,9 @@ import { FormControl, FormLabel, Input, FormErrorMessage } from '@chakra-ui/reac
 import { BASIC_COLOR } from '@/utils/const'
 
 export interface IInput {
-  error?: string
-  label?: string
-  touched?: boolean
+  error?: string | any
+  label?: string | any
+  touched?: boolean | any
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   onBlur: (e: FocusEvent<HTMLInputElement>) => void
   value: string

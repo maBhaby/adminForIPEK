@@ -51,6 +51,9 @@ const StudentEdit: FC = observer(() => {
     try {
       const idNum = id ? +id : null
       await fetcher(idNum, value);
+      if (!idNum) {
+        ModalStore.open('notification', { text: 'Успешное создание' })
+      }
     } catch (error) {
       ModalStore.open('error', { error })
     }
@@ -60,8 +63,10 @@ const StudentEdit: FC = observer(() => {
     initialValues: student,
     enableReinitialize: true,
     validationSchema: StudentEditShema,
-    onSubmit: (value) => {
+    onSubmit: (value, action) => {
+      action.setSubmitting(true)
       submitHandler(value);
+      action.setSubmitting(false)
     },
   });
 

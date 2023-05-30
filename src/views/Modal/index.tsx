@@ -1,12 +1,13 @@
 import { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { useStores } from "@/hooks/useStore"
-import { Create, ErrorModal } from "./ModalContent"
+import { Create, ErrorModal, NotificationModal } from "./ModalContent"
 import { MODALS_TYPE } from "@/utils/const"
 
 const modals = {
   [MODALS_TYPE.USER_DATA]: Create,
   [MODALS_TYPE.ERROR]: ErrorModal,
+  [MODALS_TYPE.NOTIFICATION]:NotificationModal,
   [MODALS_TYPE.EMPTY]: null
 }
 

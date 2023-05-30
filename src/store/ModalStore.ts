@@ -1,8 +1,10 @@
 import { makeAutoObservable } from "mobx";
 import { RootStore } from "./Root";
 
+type TCurrentModal = 'notification' | 'error' | 'create' | null
+
 export class ModalStore {
-  currentModal: 'error' | 'create' | null
+  currentModal: TCurrentModal
   modalProps: any
   isOpen: boolean
   rootStore: RootStore
@@ -14,7 +16,7 @@ export class ModalStore {
     this.rootStore = rootStore
   }
 
-  open = (modalType: 'error' | 'create' | null, modalProps?: any): void => {
+  open = (modalType: TCurrentModal, modalProps?: any): void => {
     this.currentModal = modalType
     this.modalProps = modalProps
     this.isOpen = true
