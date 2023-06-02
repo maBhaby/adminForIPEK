@@ -17,9 +17,9 @@ const Auth: FC = observer(() => {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      AuthApi.login({...values}).then(
-        (res) => {console.log(res);},
-        (res) => {console.log(res);}
+      AuthApi.login({ ...values }).then(
+        (res) => { console.log(res) },
+        (res) => { console.log(res) }
       )
       // const { userName, password } = formik.values
       // userStore.login(userName, password)

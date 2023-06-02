@@ -1,13 +1,13 @@
 import { FC } from 'react'
 
-import { useStores } from '@/hooks/useStore';
-import { observer } from 'mobx-react-lite';
+import { useStores } from '@/hooks/useStore'
+import { observer } from 'mobx-react-lite'
 
-import { Tr, Td } from '@chakra-ui/react';
-import { Student } from '@/api/services/groups';
-import GroupName from '../GroupName';
-import GroupDate from '../GroupDate';
-import GroupText from '../GroupText';
+import { Tr, Td } from '@chakra-ui/react'
+import { Student } from '@/api/services/groups'
+import GroupName from '../GroupName'
+import GroupDate from '../GroupDate'
+import GroupText from '../GroupText'
 
 const content = [
   {
@@ -42,7 +42,7 @@ const content = [
   }
 ]
 
-const GroupBody:FC<Student> = observer(({
+const GroupBody: FC<Student> = observer(({
   patronymic,
   last_name,
   fist_name,
@@ -64,9 +64,9 @@ const GroupBody:FC<Student> = observer(({
     store.ModalStore.open('userData', { id })
   }
   return (
-    <Tr onClick={handleOpenModal} _hover={{ backgroundColor: "gray.100" }} cursor="pointer">
-      {content.map(({id, Component, content}) => (
-        <Td key={id} p="0.75rem">
+    <Tr onClick={handleOpenModal} _hover={{ backgroundColor: 'gray.100' }} cursor='pointer'>
+      {content.map(({ id, Component, content }) => (
+        <Td key={id} p='0.75rem'>
           <Component
             patronymic={patronymic}
             last_name={last_name}
@@ -74,10 +74,10 @@ const GroupBody:FC<Student> = observer(({
             date={birthday}
             content={contentForTooltip[content]}
           />
-      </Td>
+        </Td>
       ))}
     </Tr>
-  );
+  )
 })
 
 export default GroupBody

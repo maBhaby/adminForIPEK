@@ -1,12 +1,12 @@
 import { FC } from 'react'
 
-import { Box } from "@chakra-ui/react"
+import { Box } from '@chakra-ui/react'
 
 interface IGroupDate {
   date?: string
 }
 
-const GroupDate:FC<IGroupDate> = ({
+const GroupDate: FC<IGroupDate> = ({
   date
 }) => {
   let formatDate = '-'

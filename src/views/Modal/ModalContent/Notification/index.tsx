@@ -1,4 +1,4 @@
-import { IModalsBase } from "@/interfaces";
+import { IModalsBase } from '@/interfaces'
 import {
   Modal,
   ModalOverlay,
@@ -7,16 +7,16 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
-} from "@chakra-ui/react";
-import { FC } from "react";
+  Button
+} from '@chakra-ui/react'
+import { FC } from 'react'
 
 interface IUserDataModal extends IModalsBase {}
 
 const NotificationModal: FC<IUserDataModal> = ({
   closeModal,
   isOpen,
-  modalProps,
+  modalProps
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
@@ -27,13 +27,13 @@ const NotificationModal: FC<IUserDataModal> = ({
         <ModalBody>{modalProps?.text && modalProps.text}</ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" onClick={closeModal}>
+          <Button colorScheme='blue' onClick={closeModal}>
             Закрыть
           </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
-  );
-};
+  )
+}
 
-export default NotificationModal;
+export default NotificationModal

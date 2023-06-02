@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Box } from "@chakra-ui/react"
+import { Box } from '@chakra-ui/react'
 
 interface IGroupName {
   patronymic?: string
@@ -8,7 +8,7 @@ interface IGroupName {
   last_name?: string
 }
 
-const GroupName:FC<IGroupName> = ({
+const GroupName: FC<IGroupName> = ({
   patronymic,
   fist_name,
   last_name

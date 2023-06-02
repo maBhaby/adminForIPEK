@@ -2,7 +2,8 @@
  * Import all your stores
  */
 //
-import { ModalStore } from "./ModalStore";
+import { ModalStore } from './ModalStore'
+
 /**
 * Root Store Class with
 */
@@ -10,7 +11,7 @@ export class RootStore {
   ModalStore: ModalStore
   constructor () {
     this.ModalStore = new ModalStore(this)
-    //[INIT]
+    // [INIT]
     // this.UsersListStore.fetchUserList()
   }
 }

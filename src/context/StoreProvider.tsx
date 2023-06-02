@@ -3,6 +3,7 @@ import { RootStore } from '@/store/Root'
 
 // @ts-expect-error
 const T: RootStore = {}
+
 export const StoreContext = createContext<RootStore>(T)
 
 type StoreComponent = FC<{

@@ -163,4 +163,3 @@ export interface IModalsBase {
   isOpen: boolean
   modalProps: any
 }
-

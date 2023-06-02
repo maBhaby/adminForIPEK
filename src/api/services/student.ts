@@ -19,13 +19,21 @@ export interface IStudent {
   student: IStudentData
 }
 
+export interface IStud {
+  fist_name: string
+  id?: 5
+  last_name: string
+  patronymic: string
+}
+
 export interface IStudents {
-  students: number[]
+  students: IStud[]
 }
 
 class StudentApiService extends BaseApi {
   public createStudentList (data: any): void {
-    this.axios.post('api/v1/studentlist/', data)
+    this.axios
+      .post('api/v1/studentlist/', data)
       .then((data) => console.log(data))
       .catch((data) => console.log(data))
   }
@@ -40,7 +48,10 @@ class StudentApiService extends BaseApi {
     return res.data
   }
 
-  public changeStudent = async (id: number | any, body: IStudent | any): Promise<any> => {
+  public changeStudent = async (
+    id: number | any,
+    body: IStudent | any
+  ): Promise<any> => {
     const res = await this.axios.put(`api/v1/studentlist/${id}`, body)
     return res.data
   }
@@ -52,7 +63,7 @@ class StudentApiService extends BaseApi {
 
   public createStudent = async (body: IStudent | any): Promise<any> => {
     debugger
-    const res = await this.axios.post(`api/v1/studentlist/`, body)
+    const res = await this.axios.post('api/v1/studentlist/', body)
     return res
   }
 }

@@ -1,8 +1,8 @@
-import { FC, MouseEvent } from "react";
-import useSWR from "swr";
-import { useNavigate } from "react-router-dom";
-import { studentApiService } from "@/api/services/student";
-import Loader from "@/views/Loader";
+import { FC, MouseEvent } from 'react'
+import useSWR from 'swr'
+import { useNavigate } from 'react-router-dom'
+import { studentApiService } from '@/api/services/student'
+import Loader from '@/views/Loader'
 import {
   Table,
   Thead,
@@ -11,43 +11,45 @@ import {
   Th,
   Td,
   TableContainer,
-  Button,
-} from "@chakra-ui/react";
+  Button
+} from '@chakra-ui/react'
 
-import DropDown from "@/views/DropDown";
+import DropDown from '@/views/DropDown'
 
 const Students: FC = () => {
   const { data, isLoading, mutate } = useSWR(
-    "api/studentList",
+    'api/studentList',
     studentApiService.getStudentList
-  );
-  const students = data?.students;
-  const navigate = useNavigate();
+  )
+  const students = data?.students
+  const navigate = useNavigate()
 
-  const redirectToStudentEdit = (id: number): void => {
-    navigate(`/student/${id}?id=${id}`, { state: { id } });
-  };
+  const redirectToStudentEdit = (id: number | undefined): void => {
+    if (id) {
+      navigate(`/student/${id}?id=${id}`, { state: { id } })
+    }
+  }
   const redirectToStudentCreate = (): void => {
-    navigate(`/student/create`);
-  };
+    navigate('/student/create')
+  }
 
   const deletStudent = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
     e.stopPropagation()
     await studentApiService.deletStudent(+e.target.value)
     mutate(studentApiService.getStudentList)
-  };
+  }
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader />
   }
 
   return (
-    <TableContainer borderRadius="10px">
-      <Table bg="whiteAlpha.900" variant="simple">
+    <TableContainer borderRadius='10px'>
+      <Table bg='whiteAlpha.900' variant='simple'>
         <Thead>
           <Tr>
             <Th>Студенты</Th>
-            <Th w="50px">
+            <Th w='50px'>
               <Button onClick={redirectToStudentCreate}>+</Button>
             </Th>
           </Tr>
@@ -57,13 +59,13 @@ const Students: FC = () => {
             <Tr
               key={id}
               onClick={() => redirectToStudentEdit(id)}
-              cursor="pointer"
+              cursor='pointer'
             >
               <Td>
-                {fist_name} {last_name}: Какой то студент
+                {fist_name} {last_name}
               </Td>
               <Td p='10px' textAlign='center'>
-                <DropDown.Body title={"+"}>
+                <DropDown.Body title='+'>
                   <DropDown.MenuList value={id} onClick={deletStudent}>удалить</DropDown.MenuList>
                 </DropDown.Body>
               </Td>
@@ -72,7 +74,7 @@ const Students: FC = () => {
         </Tbody>
       </Table>
     </TableContainer>
-  );
-};
+  )
+}
 
-export default Students;
+export default Students

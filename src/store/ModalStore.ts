@@ -1,7 +1,7 @@
-import { makeAutoObservable } from "mobx";
-import { RootStore } from "./Root";
+import { makeAutoObservable } from 'mobx'
+import { RootStore } from './Root'
 
-type TCurrentModal = 'notification' | 'error' | 'create' | null
+type TCurrentModal = 'notification' | 'error' | 'studentAdd' | 'createPost' | null
 
 export class ModalStore {
   currentModal: TCurrentModal
@@ -27,5 +27,4 @@ export class ModalStore {
     this.isOpen = false
     this.modalProps = null
   }
-
 }

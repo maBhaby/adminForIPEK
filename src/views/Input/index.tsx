@@ -1,8 +1,8 @@
 import { FC, ChangeEvent, FocusEvent } from 'react'
-import { FormControl, FormLabel, Input, FormErrorMessage } from '@chakra-ui/react'
+import { FormControl, FormLabel, Input, FormErrorMessage, InputProps } from '@chakra-ui/react'
 import { BASIC_COLOR } from '@/utils/const'
 
-export interface IInput {
+export interface IInput extends InputProps {
   error?: string | any
   label?: string | any
   touched?: boolean | any
@@ -13,9 +13,9 @@ export interface IInput {
   type: string
 }
 
-const CustomInput: FC<IInput> = ({ error, label, onChange, onBlur, value, name, type, touched }) => {
+const CustomInput: FC<IInput> = ({ error, label, onChange, onBlur, value, name, type, touched, ...props }) => {
   return (
-    <FormControl position='relative' isInvalid={Boolean(error) && touched}>
+    <FormControl w='auto' position='relative' isInvalid={Boolean(error) && touched}>
       {Boolean(label) && <FormLabel>{label}</FormLabel>}
       <Input
         onBlur={onBlur}
@@ -24,6 +24,7 @@ const CustomInput: FC<IInput> = ({ error, label, onChange, onBlur, value, name, 
         value={value}
         type={type}
         bg={BASIC_COLOR.WHITE}
+        {...props}
       />
       {Boolean(touched) && <FormErrorMessage position='absolute' left='0' bottom='-20px'>{error}</FormErrorMessage>}
     </FormControl>

@@ -8,7 +8,7 @@ export const ROUTER_PATHS = {
   GROUP_EDIT: '/group/:id',
   USERS: 'users',
   COLLEAGUE: 'colleague',
-  COLLEAGUE_EDIT: 'colleague/:id',
+  COLLEAGUE_EDIT: 'colleague/:id'
 }
 
 export const BASIC_COLOR = {
@@ -49,12 +49,13 @@ export const GROUP_EDIT_HEADER_DATA = [
   {
     id: 5,
     label: 'Год поступления'
-  },
+  }
 ]
 
 export const MODALS_TYPE = {
-  USER_DATA: 'userData',
+  STUDENT_ADD: 'studentAdd',
   ERROR: 'error',
-  NOTIFICATION:'notification',
+  NOTIFICATION: 'notification',
+  CREATE_POSTS: 'createPost',
   EMPTY: 'empty'
 }
