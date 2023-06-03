@@ -27,9 +27,13 @@ const Group: FC = () => {
     navigate(`/group/${id}?id=${id}`)
   }
 
+  const redirectToCreate = (): void => {
+    navigate(`/group/create`)
+  }
+
   const deleteGroup = async (e: MouseEvent<HTMLButtonElement>): Promise<void> => {
     e.stopPropagation()
-    await groupsApiService.deleteGroup(+e.target.value)
+    await groupsApiService.deleteGroup(+e.target.value as any)
     mutate(groupsApiService.getGroupList)
   }
 
@@ -41,13 +45,13 @@ const Group: FC = () => {
         <Thead>
           <Tr>
             <Th>Группы</Th>
-            <Th w='50px'><Button>+</Button></Th>
+            <Th w='50px'><Button onClick={redirectToCreate} >+</Button></Th>
           </Tr>
         </Thead>
         <Tbody>
           {data?.groups?.map((el, i) => (
             <Tr onClick={() => { redirectToStudentEdit(el.id) }} key={i} cursor='pointer'>
-              <Td>{el.number}:Какой то студент</Td>
+              <Td>{el.number}</Td>
               <Td p='10px' textAlign='center'>
                 <DropDown.Body title='+'>
                   <DropDown.MenuList value={el.id} onClick={deleteGroup}>удалить</DropDown.MenuList>

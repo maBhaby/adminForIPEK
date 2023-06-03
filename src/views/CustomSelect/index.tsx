@@ -14,6 +14,7 @@ const CustomSelect: FC<any> = ({
   apiGet,
   apiDel,
   renderData,
+  renderName = 'name'
 }) => {
   const { data, isLoading, mutate } = useSWR(`${apiGet}/test`, apiGet);
   console.log(data);
@@ -35,10 +36,10 @@ const CustomSelect: FC<any> = ({
         maxW="300px"
       >
         {data &&
-          data[renderData].map(({ id, name }) => {
+          data[renderData].map((el) => {
             return (
-              <option key={id} value={id}>
-                {name}
+              <option key={el.id} value={el.id}>
+                {el[renderName]}
               </option>
             );
           })}

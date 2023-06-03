@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ROUTER_PATHS } from '@/utils/const'
 
-import { Main, ErrorPage, EditProduct, GroupEditPage, Colleague, ColleagueEdit } from '@/pages'
+import { Main, ErrorPage, EditProduct, GroupEditPage, Colleague, ColleagueEdit, RegisterPage } from '@/pages'
 import Statistics from '../Statistics'
 import Group from '../Group'
 import StudentEdit from '../StudentEdit'
@@ -58,6 +58,10 @@ const Routes: FC = () => {
           <Auth />
         </Layouts.Login>
       )
+    },
+    {
+      path: ROUTER_PATHS.REGISTER,
+      element: (<RegisterPage />)
     }
   ])
 

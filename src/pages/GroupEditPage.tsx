@@ -73,12 +73,15 @@ const GroupEditPage: FC = observer(() => {
     <Box>
       <Formik
         initialValues={group|| initialValuesFormik}
+        validationSchema={GroupEditPage}
         onSubmit={(value) => {
           console.log(value)
           groupsApiService.changeGroup(id, value)
         }}
       >
         {(formik) => {
+          console.log(formik);
+          
           return (
             <form onSubmit={formik.handleSubmit}>
               <Title group={formik.values} formik={formik} />

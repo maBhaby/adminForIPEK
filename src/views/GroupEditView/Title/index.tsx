@@ -39,15 +39,16 @@ const Title: FC<IProps> = ({ group, formik }) => {
           <Text as='h1' >
             Учебный план:
           </Text>
-          {/* <CustomSelect
+          <CustomSelect
             name='speciality'
             value={group.plan}
             apiGet={groupsApiService.getPlan}
             apiDel={groupsApiService.deletePlan}
             renderData='PreparationPlan'
+            renderName='level_preparation_PPCCZ'
             onBlur={handleBlur}
             onChange={handleChange}
-          /> */}
+          />
         </Flex>
       </Flex>
 

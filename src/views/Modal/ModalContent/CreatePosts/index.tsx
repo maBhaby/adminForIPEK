@@ -1,9 +1,9 @@
-import { FC } from 'react'
+import { FC, useState } from "react";
 
-import useSWR from 'swr'
-import { useFormik } from 'formik'
+import useSWR from "swr";
+import { useFormik } from "formik";
 
-import { ColleagueApi } from '@/api/services/colleague'
+import { ColleagueApi } from "@/api/services/colleague";
 
 import {
   Modal,
@@ -13,45 +13,52 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button
-} from '@chakra-ui/react'
-import { IModalsBase } from '@/interfaces'
-import Input from '@/views/Input'
-import Loader from '@/views/Loader'
+  Button,
+} from "@chakra-ui/react";
+import { IModalsBase } from "@/interfaces";
+import Input from "@/views/Input";
+import Loader from "@/views/Loader";
+import { CreatePostShema } from "@/utils/schemas/CreatePostShema";
 
 interface IUserDataModal extends IModalsBase {}
 
 const CreatePosts: FC<IUserDataModal> = ({
   closeModal,
   isOpen,
-  modalProps
+  modalProps,
 }) => {
+  const [isCreate, setIsCreate] = useState(false);
   const { data, isLoading } = useSWR(
-    'api/v1/Colleaguelist/',
+    "api/v1/Colleaguelist/",
     ColleagueApi.getPositions
-  )
-  console.log(data)
+  );
+  console.log(data);
 
   const formik = useFormik({
     initialValues: {
-      name: ''
+      name: "",
     },
+    validationSchema: CreatePostShema,
     onSubmit: (value) => {
-      debugger
+      debugger;
       ColleagueApi.setPosition(value)
         .then((res) => {
-          console.log(res)
+          setIsCreate(true);
+          setTimeout(() => {
+            setIsCreate(false);
+          }, 3000);
+          console.log(res);
         })
         .catch((res) => {
-          console.log(res)
-        })
-    }
-  })
+          console.log(res);
+        });
+    },
+  });
 
-  if (isLoading) return <Loader />
+  if (isLoading) return <Loader />;
 
-  const { values, handleSubmit, handleBlur, handleChange } = formik
-  console.log(formik)
+  const { values, handleSubmit, handleBlur, handleChange, errors, touched } = formik;
+  console.log(formik);
 
   return (
     <form>
@@ -62,23 +69,31 @@ const CreatePosts: FC<IUserDataModal> = ({
           <ModalCloseButton />
           <ModalBody>
             <Input
-              name='name'
+              name="name"
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.name}
-              type='text'
+              error={errors.name}
+              touched={touched.name}
+              type="text"
             />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={closeModal}>
+            <Button colorScheme="blue" mr={3} onClick={closeModal}>
               Закрыть
             </Button>
-            <Button onClick={handleSubmit} type='submit'>Сохранить</Button>
+            <Button
+              onClick={handleSubmit}
+              bgColor={isCreate ? "green.400" : "#EDF2F7"}
+              type="submit"
+            >
+              Сохранить
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </form>
-  )
-}
+  );
+};
 
-export default CreatePosts
+export default CreatePosts;

@@ -8,7 +8,8 @@ export const ROUTER_PATHS = {
   GROUP_EDIT: '/group/:id',
   USERS: 'users',
   COLLEAGUE: 'colleague',
-  COLLEAGUE_EDIT: 'colleague/:id'
+  COLLEAGUE_EDIT: 'colleague/:id',
+  REGISTER: '/register'
 }
 
 export const BASIC_COLOR = {
