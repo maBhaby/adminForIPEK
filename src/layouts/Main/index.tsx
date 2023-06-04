@@ -11,6 +11,7 @@ import {
   useDisclosure,
   Collapse,
 } from "@chakra-ui/react";
+import Avatar from "@/components/Avatar";
 import Navigate from "@/views/Navigate";
 import { logo } from "@/assets";
 
@@ -48,6 +49,9 @@ const Main: FC<ILayout> = ({ children }) => {
             </Text>
           </Box>
           <Navigate />
+          <Flex justifyContent='center' pb='50px' flex='1 1 auto' >
+            <Avatar />
+          </Flex>
         </Flex>
       </Collapse>
       <Box

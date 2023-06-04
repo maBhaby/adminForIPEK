@@ -2,13 +2,16 @@ import { FC } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ROUTER_PATHS } from '@/utils/const'
 
-import { Main, ErrorPage, EditProduct, GroupEditPage, Colleague, ColleagueEdit, RegisterPage } from '@/pages'
+import { Main, ErrorPage, EditProduct, GroupEditPage, Colleague, ColleagueEdit, RegisterPage, SpecialityList } from '@/pages'
 import Statistics from '../Statistics'
 import Group from '../Group'
 import StudentEdit from '../StudentEdit'
 import Layouts from '@/layouts'
 import Auth from '@/components/Auth'
 import Products from '../Products'
+import PreparationPlanList from '@/pages/PreparationPlanList'
+import PreparationEdit from '@/pages/PreparationEdit'
+import SpecialityEdit from '@/pages/SpecialityEdit'
 
 const Routes: FC = () => {
   const router = createBrowserRouter([
@@ -48,6 +51,22 @@ const Routes: FC = () => {
         {
           path: ROUTER_PATHS.COLLEAGUE_EDIT,
           element: (<ColleagueEdit />)
+        },
+        {
+          path: ROUTER_PATHS.PREPARATION_PLAN_LIST,
+          element: (<PreparationPlanList />)
+        },
+        {
+          path: ROUTER_PATHS.PREPARATION_PLAN_EDIT,
+          element: (<PreparationEdit />)
+        },
+        {
+          path: ROUTER_PATHS.SPECIALITY_LIST,
+          element: (<SpecialityList />)
+        },
+        {
+          path: ROUTER_PATHS.SPECIALITY_EDIT,
+          element: (<SpecialityEdit />)
         }
       ]
     },

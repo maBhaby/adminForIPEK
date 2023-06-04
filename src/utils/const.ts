@@ -9,7 +9,11 @@ export const ROUTER_PATHS = {
   USERS: 'users',
   COLLEAGUE: 'colleague',
   COLLEAGUE_EDIT: 'colleague/:id',
-  REGISTER: '/register'
+  REGISTER: '/register',
+  PREPARATION_PLAN_LIST: '/preparations',
+  PREPARATION_PLAN_EDIT: '/preparations/:id',
+  SPECIALITY_LIST: '/specialitys',
+  SPECIALITY_EDIT: '/speciality/:id',
 }
 
 export const BASIC_COLOR = {

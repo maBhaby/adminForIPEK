@@ -5,6 +5,7 @@ import GroupEditPage from "./GroupEditPage";
 import Colleague from "./Colleague";
 import ColleagueEdit from "./ColleagueEdit";
 import RegisterPage from "./Register";
+import SpecialityList from "./SpecialityList";
 
 export {
   ErrorPage,
@@ -14,4 +15,5 @@ export {
   Colleague,
   ColleagueEdit,
   RegisterPage,
+  SpecialityList
 };

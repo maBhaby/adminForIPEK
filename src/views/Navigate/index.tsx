@@ -16,6 +16,14 @@ const Links = [
   {
     title: 'Преподаватели',
     rout: ROUTER_PATHS.COLLEAGUE
+  },
+  {
+    title: 'Учебные планы',
+    rout: ROUTER_PATHS.PREPARATION_PLAN_LIST
+  },
+  {
+    title: 'Специальности',
+    rout: ROUTER_PATHS.SPECIALITY_LIST
   }
 ]
 
