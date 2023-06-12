@@ -26,7 +26,7 @@ const Main: FC<ILayout> = ({ children }) => {
           flexDirection="column"
           backgroundColor={BASIC_COLOR.BLACK}
           height="100vh"
-          maxWidth="250px"
+          maxWidth="270px"
           w="100%"
           minHeight="100%"
         >
@@ -45,7 +45,7 @@ const Main: FC<ILayout> = ({ children }) => {
               fontFamily="Adderley"
               fontSize="3xl"
             >
-              АДМИНКА
+              АДМИН ПАНЕЛЬ
             </Text>
           </Box>
           <Navigate />
@@ -58,7 +58,7 @@ const Main: FC<ILayout> = ({ children }) => {
         minHeight="100vh"
         p="5"
         pt="80px"
-        ml={isOpen ? "250px" : "0px"}
+        ml={isOpen ? "270px" : "0px"}
         position="relative"
       >
         <Button

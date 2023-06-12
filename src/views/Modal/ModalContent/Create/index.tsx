@@ -1,9 +1,10 @@
-import { FC } from 'react'
+import { FC, useState, useEffect } from "react";
 
-import useSWR from 'swr'
-import { useFormik } from 'formik'
+import useSWR from "swr";
+import { useFormik } from "formik";
 
-import { studentApiService } from '@/api/services/student'
+import { studentApiService } from "@/api/services/student";
+import { ColleagueApi } from "@/api/services/colleague";
 
 import {
   Drawer,
@@ -12,73 +13,118 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Flex
-} from '@chakra-ui/react'
-import { IModalsBase } from '@/interfaces'
-import Loader from '@/views/Loader'
+  Flex,
+  Box,
+  DrawerFooter,
+  Button,
+  Checkbox,
+} from "@chakra-ui/react";
+import { IModalsBase } from "@/interfaces";
+import Loader from "@/views/Loader";
 
-import Input from '@/views/Input'
+// import Input from '@/views/Input'
 
 interface IUserDataModal extends IModalsBase {}
 
 const init = {
   students: [
     {
-      fist_name: 'le',
-      last_name: 'le',
-      patronymic: 'le',
+      fist_name: "le",
+      last_name: "le",
+      patronymic: "le",
       id: 0,
-      inGroup: false
-    }
-  ]
-}
+      inGroup: false,
+    },
+  ],
+};
 
 const Create: FC<IUserDataModal> = ({ closeModal, isOpen, modalProps }) => {
   const { data, isLoading } = useSWR(
-    'api/v1/studentlist/',
+    "api/v1/studentlist/",
     studentApiService.getStudentList
-  )
-  console.log(data)
+  );
+
+  const [defData, setDefData] = useState({});
+  console.log(modalProps);
 
   const formik = useFormik({
-    initialValues: data || init,
-    onSubmit: (value) => {
-      console.log(value)
+    initialValues: defData,
+    enableReinitialize: true,
+    onSubmit: (value: any) => {
+      console.log(value);
+      const res = value?.students
+        .filter((el: any) => {
+          if (el.inGroup) {
+            return el.id;
+          }
+        })
+        .map((el: any) => el.id);
+      console.log(res);
+      ColleagueApi.changeColleague(modalProps.id, res);
+    },
+  });
+
+  useEffect(() => {
+    if (data) {
+      const defaultValue = data.students.filter(
+        (el) => !modalProps.studentId.includes(el.id)
+      );
+      setDefData({ students: defaultValue });
     }
-  })
+  }, [data]);
 
-  if (isLoading) return <Loader />
+  const { values, handleSubmit, handleBlur, handleChange, setFieldValue } =
+    formik;
+  console.log(formik);
 
-  const { values, handleSubmit, handleBlur, handleChange } = formik
-  console.log(formik)
+  const handleChangeCheckbox = (e: any, i: any) => {
+    debugger;
+    setFieldValue(`students[${i}].inGroup`, e.target.checked);
+  };
+
+  if (isLoading) return <Loader />;
+
+  if (!data) return <Box>null</Box>;
 
   return (
-    <Drawer isOpen={isOpen} placement='right' onClose={closeModal}>
+    <Drawer isOpen={isOpen} placement="right" onClose={closeModal}>
       <DrawerOverlay />
-      <DrawerContent maxW='420px'>
-        <DrawerCloseButton top='16px' />
-        <DrawerHeader borderBottomWidth='1px'>Студет</DrawerHeader>
-        <DrawerBody p='25px'>
-          {values.students?.map((el, i) => (
-            <Flex gap='5px' key={i}>
-              <span>{el.fist_name}</span>
-              <span>{el.last_name}</span>
-              <span>{el.patronymic}</span>
-              {/* <Input
-                name={`students[${i}].inGroup`}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={}
-              /> */}
-            </Flex>
-          ))}
-        </DrawerBody>
-      </DrawerContent>
+      <form onSubmit={handleSubmit}>
+        <DrawerContent maxW="420px">
+          <DrawerCloseButton top="16px" />
+          <DrawerHeader borderBottomWidth="1px">Студет</DrawerHeader>
+          <DrawerBody p="25px">
+            {values?.students?.map((el: any, i: number) => (
+              <Flex justifyContent="space-between" gap="5px" key={i}>
+                <Flex fontSize="18px" gap="5px">
+                  <span>{el.fist_name}</span>
+                  <span>{el.last_name}</span>
+                  <span>{el.patronymic}</span>
+                </Flex>
+                <Checkbox
+                  size="lg"
+                  onChange={(e) => {
+                    handleChangeCheckbox(e, i);
+                  }}
+                />
+              </Flex>
+            ))}
+          </DrawerBody>
+          <DrawerFooter borderTopWidth="1px">
+            <Button variant="outline" mr={3} onClick={closeModal}>
+              Cancel
+            </Button>
+            <Button type="submit" colorScheme="blue">
+              Save
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </form>
     </Drawer>
-  )
-}
+  );
+};
 
-export default Create
+export default Create;
 /**
  *
  *

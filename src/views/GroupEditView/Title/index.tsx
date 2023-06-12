@@ -40,10 +40,9 @@ const Title: FC<IProps> = ({ group, formik }) => {
             Учебный план:
           </Text>
           <CustomSelect
-            name='speciality'
+            name='plan'
             value={group.plan}
             apiGet={groupsApiService.getPlan}
-            apiDel={groupsApiService.deletePlan}
             renderData='PreparationPlan'
             renderName='level_preparation_PPCCZ'
             onBlur={handleBlur}
@@ -59,7 +58,6 @@ const Title: FC<IProps> = ({ group, formik }) => {
             name='speciality'
             value={group.speciality}
             apiGet={groupsApiService.getDisciplineslist}
-            apiDel={groupsApiService.deleteDisciplineslist}
             renderData='speciality'
             onBlur={handleBlur}
             onChange={handleChange}
@@ -68,10 +66,11 @@ const Title: FC<IProps> = ({ group, formik }) => {
         <Flex gap='10px' alignItems='center'>
           <Text>Преподаватель:</Text>
           <CustomSelect
-            name='colleagues'
+            name='colleague'
             value={group.colleague}
             apiGet={ColleagueApi.getColleagueList}
             renderData='colleagues'
+            renderName='last_name'
             onBlur={handleBlur}
             onChange={handleChange}
           />

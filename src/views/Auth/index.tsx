@@ -16,7 +16,7 @@ const Auth: FC<FormikValues> = ({ formik }) => {
         <Stack spacing={6}>
           <Input
             name='username'
-            label='user name'
+            label='Имя пользователя'
             onChange={handleChange}
             onBlur={handleBlur}
             error={errors.username}
@@ -29,7 +29,7 @@ const Auth: FC<FormikValues> = ({ formik }) => {
             onChange={handleChange}
             error={errors.password}
             onBlur={handleBlur}
-            label='password'
+            label='Пароль'
             type='password'
             touched={touched.password}
             value={values.password}

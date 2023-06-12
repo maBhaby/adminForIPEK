@@ -36,7 +36,7 @@ const CustomSelect: FC<any> = ({
         maxW="300px"
       >
         {data &&
-          data[renderData].map((el) => {
+          data[renderData].map((el: any) => {
             return (
               <option key={el.id} value={el.id}>
                 {el[renderName]}
