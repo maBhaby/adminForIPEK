@@ -1,4 +1,4 @@
-import logo from './viceSeason.png'
+import logo from './logo.svg'
 import trash from './trash.png'
 
 export {

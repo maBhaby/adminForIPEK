@@ -103,6 +103,20 @@ const Title: FC<IProps> = ({ group, formik }) => {
           />
         </Flex>
       </Flex>
+      <Flex mt='10px' justifyContent='space-between'>
+        <Flex gap='10px' alignItems='center'>
+          <Text>Год поступления:</Text>
+          <Input
+            name='year_receipt'
+            type='date'
+            value={group.year_receipt}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            error={errors.year_receipt}
+            touched={touched.year_receipt}
+          />
+        </Flex>
+      </Flex>
     </>
   )
 }

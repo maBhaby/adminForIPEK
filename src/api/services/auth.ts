@@ -27,11 +27,13 @@ function getCookie(name) {
 // alert(document.cookie)
 class AuthApiService extends BaseApi {
   public login = async (userData: { username: string, password: string }) => {
-    
-    const res = this.axios.post('api/v1/auth/login/', userData, {
-  
-    })
+    const res = this.axios.post('api/v1/auth/login/', userData)
     console.log(res)
+  }
+
+  public csrftoken = async () => {
+    const csrf = await this.axios.get('api/v1/csrf_cookie') 
+    console.log(Cookies.get('csrftoket'));
   }
 }
 

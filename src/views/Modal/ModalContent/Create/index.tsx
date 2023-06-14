@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 
 import { studentApiService } from "@/api/services/student";
 import { ColleagueApi } from "@/api/services/colleague";
+import { groupsApiService } from "@/api/services/groups";
 
 import {
   Drawer,
@@ -21,6 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { IModalsBase } from "@/interfaces";
 import Loader from "@/views/Loader";
+import { addStudentToGroupForm } from "@/utils";
 
 // import Input from '@/views/Input'
 
@@ -50,30 +52,39 @@ const Create: FC<IUserDataModal> = ({ closeModal, isOpen, modalProps }) => {
   const formik = useFormik({
     initialValues: defData,
     enableReinitialize: true,
-    onSubmit: (value: any) => {
-      console.log(value);
-      const res = value?.students
+    onSubmit: async (value: any) => {
+      const filterStud = value?.students
         .filter((el: any) => {
           if (el.inGroup) {
             return el.id;
           }
         })
-        .map((el: any) => el.id);
-      console.log(res);
-      ColleagueApi.changeColleague(modalProps.id, res);
+      const mapFilter = filterStud.map((el: any) => el.id);
+      console.log(filterStud);
+      if (modalProps.studentId.length) {
+        groupsApiService.changeGroupStud(modalProps.id, { student: [...modalProps.studentId, ...mapFilter]});
+        modalProps.mutateFn()
+      }
+      addStudentToGroupForm(mapFilter, modalProps.formikTools) 
+      closeModal()
     },
   });
 
   useEffect(() => {
     if (data) {
       const defaultValue = data.students.filter(
-        (el) => !modalProps.studentId.includes(el.id)
+        (el) => {
+          if (modalProps.studentId) {
+            return !modalProps.studentId.includes(el.id)
+          } 
+          return el.id
+        }
       );
       setDefData({ students: defaultValue });
     }
   }, [data]);
 
-  const { values, handleSubmit, handleBlur, handleChange, setFieldValue } =
+  const { values, handleSubmit, handleBlur, handleChange, setFieldValue, isSubmitting } =
     formik;
   console.log(formik);
 
@@ -114,7 +125,7 @@ const Create: FC<IUserDataModal> = ({ closeModal, isOpen, modalProps }) => {
             <Button variant="outline" mr={3} onClick={closeModal}>
               Cancel
             </Button>
-            <Button type="submit" colorScheme="blue">
+            <Button disabled={isSubmitting} type="submit" colorScheme="blue">
               Save
             </Button>
           </DrawerFooter>

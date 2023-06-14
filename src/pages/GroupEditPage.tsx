@@ -18,7 +18,7 @@ import {
 import { GROUP_EDIT_HEADER_DATA } from "@/utils/const";
 import { groupEditSerializer } from "@/utils";
 
-import { Formik } from "formik";
+import { Formik, FieldArray } from "formik";
 
 import GroupBody from "@/views/GroupView/GroupBody";
 import { observer } from "mobx-react-lite";
@@ -36,12 +36,12 @@ interface IValue {
 }
 
 const initialValuesFormik: IValue = {
-  colleague: "Горелов",
+  colleague: 1,
   form_education: "Очная",
   number: "404",
   plan: "СПО",
   school_graduation_class: "9",
-  speciality: "Программирование в компьютерных системах",
+  speciality: 1,
   year_receipt: "",
   student: [],
 };
@@ -50,23 +50,21 @@ const GroupEditPage: FC = observer(() => {
   const { ModalStore } = useStores();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const id = searchParams.get("id");
+  const groupId = searchParams.get("id");
 
-  const { data, isLoading } = useSWR(
-    id ? `GroupEdit/${id}` : null,
-    async () => await groupsApiService.getGroup(id)
+  const { data, isLoading, mutate } = useSWR(
+    groupId ? `GroupEdit/${groupId}` : null,
+    async () => await groupsApiService.getGroup(groupId)
   );
   const group = data?.group;
   // console.log("group", group);
+  const studentIds = group?.student.map((el) => el.id);
 
   const handleAddStudentInGroup = () => {};
 
-  const handleOpenModal = () => {
-    ModalStore.open("studentAdd", {
-      studentId: group?.student.map((el) => el.id),
-      id
-    });
-  };
+  const mutateFn = () => {
+    mutate(() => groupsApiService.getGroup(groupId))
+  }
 
   if (isLoading) {
     return <Loader />;
@@ -79,12 +77,23 @@ const GroupEditPage: FC = observer(() => {
         onSubmit={(value) => {
           const serData = groupEditSerializer(value);
           debugger;
-          groupsApiService.changeGroup(id, serData);
+          if (groupId) {
+            groupsApiService.changeGroup(groupId, serData);
+          } else {
+            groupsApiService.createGroup(serData);
+          }
         }}
       >
         {(formik) => {
           console.log(formik);
-
+          const handleOpenModal = () => {
+            ModalStore.open("studentAdd", {
+              studentId: studentIds,
+              id: groupId,
+              formikTools: formik,
+              mutateFn
+            });
+          };
           return (
             <form onSubmit={formik.handleSubmit}>
               <Title group={formik.values} formik={formik} />
@@ -108,6 +117,32 @@ const GroupEditPage: FC = observer(() => {
                     </Tr>
                   </Thead>
                   <Tbody>
+                    {/* <FieldArray
+                      name="student"
+                      render={(arrayHelpers) => {
+                        return formik.values.student?.map((el: any, i:number) => {
+                          return (
+                            <>
+                              {t}
+                              <GroupBody
+                                key={id}
+                                groupId={groupId}
+                                id={id}
+                                patronymic={patronymic}
+                                last_name={last_name}
+                                fist_name={fist_name}
+                                birthday={birthday}
+                                email={email}
+                                telephone={telephone}
+                                place_residence={place_residence}
+                                place_registration={place_registration}
+                                studentIds={studentIds}
+                              />
+                            </>
+                          );
+                        });
+                      }}
+                    /> */}
                     {group?.student.map(
                       ({
                         id,
@@ -122,7 +157,9 @@ const GroupEditPage: FC = observer(() => {
                       }) => {
                         return (
                           <GroupBody
+                            mutateFn={mutateFn}
                             key={id}
+                            groupId={groupId}
                             id={id}
                             patronymic={patronymic}
                             last_name={last_name}
@@ -132,6 +169,7 @@ const GroupEditPage: FC = observer(() => {
                             telephone={telephone}
                             place_residence={place_residence}
                             place_registration={place_registration}
+                            studentIds={studentIds}
                           />
                         );
                       }

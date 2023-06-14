@@ -49,6 +49,10 @@ class GroupsApiService extends BaseApi {
     }
   }
 
+  public createGroup = async (value: any): Promise<any> => {
+    const res = await this.axios.post<IRoot>(`api/v1/grouplist/`, value)
+  }
+
   public async getGroup (count: any): Promise<IRoot> {
     const res = await this.axios.get<IRoot>(`api/v1/grouplist/${count}`)
     return res.data
@@ -56,6 +60,11 @@ class GroupsApiService extends BaseApi {
 
   public async changeGroup (count: any, value: any): Promise<IRoot> {
     const res = await this.axios.put<IRoot>(`api/v1/grouplist/${count}`, value)
+    return res.data
+  }
+
+  public async changeGroupStud (count: any, value: any): Promise<IRoot> {
+    const res = await this.axios.put<IRoot>(`api/v1/groupstudlist/${count}`, value)
     return res.data
   }
 
