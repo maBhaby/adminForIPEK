@@ -63,25 +63,34 @@ const GroupEditPage: FC = observer(() => {
   const handleAddStudentInGroup = () => {};
 
   const mutateFn = () => {
-    mutate(() => groupsApiService.getGroup(groupId))
-  }
+    mutate(() => groupsApiService.getGroup(groupId));
+  };
 
   if (isLoading) {
     return <Loader />;
   }
+
+  const handleSubmit = async (value: any) => {
+    const serData = groupEditSerializer(value);
+    debugger;
+    try {
+      if (groupId) {
+        await groupsApiService.changeGroup(groupId, serData);
+      } else {
+        await groupsApiService.createGroup(serData);
+      }
+      ModalStore.open("notification", { text: "Успешно" });
+    } catch (error) {
+      ModalStore.open("error");
+    }
+  };
 
   return (
     <Box>
       <Formik
         initialValues={group || initialValuesFormik}
         onSubmit={(value) => {
-          const serData = groupEditSerializer(value);
-          debugger;
-          if (groupId) {
-            groupsApiService.changeGroup(groupId, serData);
-          } else {
-            groupsApiService.createGroup(serData);
-          }
+          handleSubmit(value);
         }}
       >
         {(formik) => {
@@ -91,7 +100,7 @@ const GroupEditPage: FC = observer(() => {
               studentId: studentIds,
               id: groupId,
               formikTools: formik,
-              mutateFn
+              mutateFn,
             });
           };
           return (

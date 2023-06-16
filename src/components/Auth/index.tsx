@@ -18,7 +18,7 @@ const Auth: FC = observer(() => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       AuthApi.login({ ...values }).then(
-        () => { navigate('/students') },
+        () => { navigate('/') },
         (res) => { throw new Error(res)}
       )
     }

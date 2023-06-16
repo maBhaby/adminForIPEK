@@ -19,7 +19,7 @@ const ErrorModal: FC<IUserDataModal> = ({ closeModal, isOpen, modalProps }) => {
     <Modal isOpen={isOpen} onClose={closeModal}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+        <ModalHeader>Уведомление</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           Что то пошло не так. Пожалуйста попробуйте позже

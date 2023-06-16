@@ -22,7 +22,7 @@ const NotificationModal: FC<IUserDataModal> = ({
     <Modal isOpen={isOpen} onClose={closeModal}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+        <ModalHeader>Уведомление</ModalHeader>
         <ModalCloseButton />
         <ModalBody>{modalProps?.text && modalProps.text}</ModalBody>
 

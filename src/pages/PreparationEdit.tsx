@@ -12,6 +12,7 @@ import { ColleagueEditShema } from '@/utils/schemas/ColleagueEditShema'
 import Loader from '@/views/Loader'
 
 import PreparationPlanEdit from '@/views/PreparationPlanEditView'
+import { PreparationEditSheme } from '@/utils/schemas/PreparationEditSheme'
 
 const emptyColleague = {
   level_preparation_PPCCZ: '',
@@ -61,6 +62,7 @@ const PreparationEdit: FC = observer(() => {
 
   const formikTools = useFormik<TColleague>({
     initialValues: colleague,
+    validationSchema: PreparationEditSheme,
     enableReinitialize: true,
     onSubmit: (value) => {
       submitHandler(value)

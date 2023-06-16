@@ -61,8 +61,8 @@ const Create: FC<IUserDataModal> = ({ closeModal, isOpen, modalProps }) => {
         })
       const mapFilter = filterStud.map((el: any) => el.id);
       console.log(filterStud);
-      if (modalProps.studentId.length) {
-        groupsApiService.changeGroupStud(modalProps.id, { student: [...modalProps.studentId, ...mapFilter]});
+      if (modalProps.id) {
+        groupsApiService.changeGroupStud(modalProps.id, { student: [...modalProps?.studentId, ...mapFilter]});
         modalProps.mutateFn()
       }
       addStudentToGroupForm(mapFilter, modalProps.formikTools) 
@@ -103,7 +103,7 @@ const Create: FC<IUserDataModal> = ({ closeModal, isOpen, modalProps }) => {
       <form onSubmit={handleSubmit}>
         <DrawerContent maxW="420px">
           <DrawerCloseButton top="16px" />
-          <DrawerHeader borderBottomWidth="1px">Студет</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">Студент</DrawerHeader>
           <DrawerBody p="25px">
             {values?.students?.map((el: any, i: number) => (
               <Flex justifyContent="space-between" gap="5px" key={i}>

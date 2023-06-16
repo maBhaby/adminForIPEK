@@ -26,6 +26,10 @@ function getCookie(name) {
 // console.log(document.cookie);
 // alert(document.cookie)
 class AuthApiService extends BaseApi {
+  // public getlogin = async () => {
+  //   const res = this.axios.get('api/v1/auth/login/')
+  //   console.log(res)
+  // }
   public login = async (userData: { username: string, password: string }) => {
     const res = this.axios.post('api/v1/auth/login/', userData)
     console.log(res)
