@@ -14,9 +14,12 @@ import {
   Th,
   Td,
   TableContainer,
+  Image,
   Button
 } from '@chakra-ui/react'
 import Loader from '@/views/Loader'
+
+import { burger } from '@/assets'
 
 const SpecialityList = () => {
   const { data, isLoading, mutate } = useSWR(
@@ -59,12 +62,13 @@ const SpecialityList = () => {
               onClick={() => redirectToCollEdit(id)}
               key={id}
               cursor='pointer'
+              _hover={{bgColor: 'gray.200'}}
             >
               <Td>
                 {name}
               </Td>
               <Td p='10px' textAlign='center'>
-                <DropDown.Body title='+'>
+                <DropDown.Body title={<Image src={burger} h='15px' w='15px' />}>
                   <DropDown.MenuList value={id} onClick={deletColleague}>
                     удалить
                   </DropDown.MenuList>

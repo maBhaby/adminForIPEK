@@ -55,9 +55,11 @@ const ColleagueEdit: FC = observer(() => {
       const idNum = id ? +id : null
       await fetcher(idNum, value)
       if (!id) {
-        debugger
-        return navigate('/colleague')
+        ModalStore.open('notification', { text: 'Успешное создание' })
+      } else {
+        ModalStore.open('notification', { text: 'Успешное редактирование' })
       }
+      return navigate('/colleague')
     } catch (error) {
       ModalStore.open('error', { error })
     }

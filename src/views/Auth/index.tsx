@@ -1,7 +1,8 @@
 import { FC } from 'react'
 import { FormikValues } from 'formik'
 import {
-  Checkbox,
+
+  Text,
   Stack,
   Button
 } from '@chakra-ui/react'
@@ -13,10 +14,11 @@ const Auth: FC<FormikValues> = ({ formik }) => {
   return (
     <form style={{ width: '100%' }} onSubmit={handleSubmit}>
       <Stack spacing={8} mx='auto' w='100%' maxW='lg' py={12} px={6}>
+        <Text textAlign='center' fontSize='26px'>Авторизация</Text>
         <Stack spacing={6}>
           <Input
             name='username'
-            label='Имя пользователя'
+            label='E-mail'
             onChange={handleChange}
             onBlur={handleBlur}
             error={errors.username}
@@ -34,7 +36,6 @@ const Auth: FC<FormikValues> = ({ formik }) => {
             touched={touched.password}
             value={values.password}
           />
-          <Checkbox name='rememder'>Запомнить меня</Checkbox>
           <Button type='submit' colorScheme='blue'>
             Войти
           </Button>

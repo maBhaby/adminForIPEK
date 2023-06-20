@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { groupsApiService } from '@/api/services/groups'
 
+import { burger } from '@/assets'
+
 import {
   Table,
   Thead,
@@ -13,6 +15,7 @@ import {
   Th,
   Td,
   TableContainer,
+  Image,
   Button
 } from '@chakra-ui/react'
 import DropDown from '@/views/DropDown'
@@ -50,10 +53,10 @@ const Group: FC = () => {
         </Thead>
         <Tbody>
           {data?.groups?.map((el, i) => (
-            <Tr onClick={() => { redirectToStudentEdit(el.id) }} key={i} cursor='pointer'>
+            <Tr _hover={{bgColor: 'gray.200'}}  onClick={() => { redirectToStudentEdit(el.id) }} key={i} cursor='pointer'>
               <Td>{el.number}</Td>
               <Td p='10px' textAlign='center'>
-                <DropDown.Body title='+'>
+                <DropDown.Body title={<Image src={burger} h='15px' w='15px' />}>
                   <DropDown.MenuList value={el.id} onClick={deleteGroup}>удалить</DropDown.MenuList>
                 </DropDown.Body>
               </Td>

@@ -3,7 +3,7 @@ import AuthApiService from '@/api/services/Auths/index'
 import { IUserData } from '@/interfaces'
 import Cookies from 'js-cookie'
 
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut, Auth } from 'firebase/auth'
 import { auth } from '@/firebase'
 
 class User {
@@ -23,13 +23,6 @@ class User {
 
   async login (email: string, password: string, after:any, err: any): Promise<void> {
     try {
-      // const response = await AuthApiService.login(email, password)
-      // Cookies.set('token', response.data)
-
-      // const user = await AuthApiService.userData()
-      // console.log(user)
-
-      // this.setAuth(true)
       signInWithEmailAndPassword(auth, email, password)
         .then((response) => {
           console.log(response);
@@ -46,14 +39,25 @@ class User {
     }
   }
 
-  async logout (): Promise<void> {
-    try {
-      const response = await AuthApiService.logout()
-      Cookies.remove('token', response)
-      this.setAuth(false)
-    } catch (e: any) {
-      throw new Error(e)
-    }
+  async checkLogin (succes: () => void, error: () => void) {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = {
+          email: auth.currentUser?.email
+        }
+        succes()
+      } else {
+        error()
+      }
+    })
+  }
+
+  async logout (succes: () => void, error: () => void): Promise<void> {
+    signOut(auth).then(() => {
+      succes()
+    }).catch((error) => {
+      error()
+    });
   }
 }
 

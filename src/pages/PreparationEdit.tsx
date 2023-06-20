@@ -53,8 +53,11 @@ const PreparationEdit: FC = observer(() => {
       const idNum = id ? +id : null
       await fetcher(idNum, value)
       if (!id) {
-        return navigate('/preparations')
+        ModalStore.open('notification', { text: 'Успешное создание' })
+      }else {
+        ModalStore.open('notification', { text: 'Успешное редактирование' })
       }
+      return navigate('/preparations')
     } catch (error) {
       ModalStore.open('error', { error })
     }

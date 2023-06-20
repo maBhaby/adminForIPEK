@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
+import { FC, useState, useLayoutEffect } from "react";
 import { ILayout } from "@/interfaces";
+import { useNavigate } from "react-router-dom";
 import { BASIC_COLOR } from "@/utils/const";
 import { Outlet } from "react-router-dom";
 import {
@@ -13,10 +14,32 @@ import {
 } from "@chakra-ui/react";
 import Avatar from "@/components/Avatar";
 import Navigate from "@/views/Navigate";
+import { observer } from "mobx-react-lite";
+import { userStore } from "@/store/user";
 import { logo } from "@/assets";
+import Loader from "@/views/Loader";
 
-const Main: FC<ILayout> = ({ children }) => {
+const Main: FC<ILayout> = observer(({ children }) => {
   const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true });
+  const [ isLoading, setIsLoading ] = useState(false)
+  const nav = useNavigate()
+  
+  useLayoutEffect(() => {
+    setIsLoading(true)
+    userStore.checkLogin(() => {
+      console.log('INIT')
+      setIsLoading(false)
+    }, () => {
+      nav('/login')
+      setIsLoading(false)
+    })
+  }, [])
+
+  if (isLoading) {
+    return (
+      <Loader/>
+    )
+  }
 
   return (
     <Box bg={BASIC_COLOR.BACKGROUND}>
@@ -80,6 +103,6 @@ const Main: FC<ILayout> = ({ children }) => {
       {children}
     </Box>
   );
-};
+})
 
 export default Main;

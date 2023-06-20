@@ -5,6 +5,7 @@ export const loginSchema = yup
   .shape({
     username: yup
       .string()
-      .required('This field is required.'),
-    password: yup.string().required('This field is required.')
+      .email('Введите валидный e-mail')
+      .required('Обязательное поле'),
+    password: yup.string().required('Обязательное поле')
   })

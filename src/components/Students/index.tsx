@@ -11,8 +11,11 @@ import {
   Th,
   Td,
   TableContainer,
-  Button
+  Button,
+  Image
 } from '@chakra-ui/react'
+
+import { burger } from '@/assets'
 
 import DropDown from '@/views/DropDown'
 
@@ -60,12 +63,13 @@ const Students: FC = () => {
               key={id}
               onClick={() => redirectToStudentEdit(id)}
               cursor='pointer'
+              _hover={{bgColor: 'gray.200'}}
             >
               <Td>
                 {fist_name} {last_name}
               </Td>
               <Td p='10px' textAlign='center'>
-                <DropDown.Body title='+'>
+                <DropDown.Body title={<Image src={burger} h='15px' w='15px' />}>
                   <DropDown.MenuList value={id} onClick={deletStudent}>удалить</DropDown.MenuList>
                 </DropDown.Body>
               </Td>

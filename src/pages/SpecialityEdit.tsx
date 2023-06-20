@@ -49,8 +49,11 @@ const SpecialityEdit: FC = observer(() => {
       const idNum = id ? +id : null
       await fetcher(idNum, value)
       if (!id) {
-        return navigate('/specialitys')
+        ModalStore.open('notification', { text: 'Успешное создание' })
+      } else {
+        ModalStore.open('notification', { text: 'Успешное редактирование' })
       }
+      return navigate('/specialitys')
     } catch (error) {
       ModalStore.open('error', { error })
     }

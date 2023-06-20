@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import useSWR from 'swr'
 import { useFormik } from 'formik'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
 import { useStores } from '@/hooks/useStore'
@@ -27,6 +27,7 @@ const emptyStudent = {
 
 const StudentEdit: FC = observer(() => {
   const location = useLocation()
+  const nav = useNavigate()
   const searchParams = new URLSearchParams(location.search)
   const id = searchParams.get('id')
   const { ModalStore } = useStores()
@@ -51,7 +52,10 @@ const StudentEdit: FC = observer(() => {
       await fetcher(idNum, value)
       if (!idNum) {
         ModalStore.open('notification', { text: 'Успешное создание' })
+      } else {
+        ModalStore.open('notification', { text: 'Успешное редактирование' })
       }
+      nav('/')
     } catch (error) {
       ModalStore.open('error', { error })
     }
