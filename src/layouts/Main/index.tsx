@@ -27,7 +27,7 @@ const Main: FC<ILayout> = observer(({ children }) => {
   useLayoutEffect(() => {
     setIsLoading(true)
     userStore.checkLogin(() => {
-      console.log('INIT')
+      // console.log('INIT')
       setIsLoading(false)
     }, () => {
       nav('/login')

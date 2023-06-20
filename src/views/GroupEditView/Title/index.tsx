@@ -15,7 +15,7 @@ interface IProps {
 
 const Title: FC<IProps> = ({ group, formik }) => {
   const { handleBlur, handleChange, errors, touched } = formik
-  console.log(formik);
+  // console.log(formik);
   
   return (
     <>

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { groupsApiService } from "@/api/services/groups";
 import useSWR from "swr";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -49,7 +49,7 @@ const initialValuesFormik: IValue = {
 const GroupEditPage: FC = observer(() => {
   const { ModalStore } = useStores();
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const groupId = searchParams.get("id");
 
@@ -72,8 +72,8 @@ const GroupEditPage: FC = observer(() => {
   }
 
   const handleSubmit = async (value: any) => {
+    debugger
     const serData = groupEditSerializer(value);
-    debugger;
     try {
       if (groupId) {
         await groupsApiService.changeGroup(groupId, serData);
@@ -81,7 +81,7 @@ const GroupEditPage: FC = observer(() => {
         await groupsApiService.createGroup(serData);
       }
       ModalStore.open("notification", { text: "Успешно" });
-      navigate('/group')
+      navigate("/group");
     } catch (error) {
       ModalStore.open("error");
     }
@@ -103,6 +103,7 @@ const GroupEditPage: FC = observer(() => {
               id: groupId,
               formikTools: formik,
               mutateFn,
+              data,
             });
           };
           return (
@@ -128,6 +129,10 @@ const GroupEditPage: FC = observer(() => {
                     </Tr>
                   </Thead>
                   <Tbody>
+                    {/* {
+                      groupId ? ()
+                      :
+                    } */}
                     {/* <FieldArray
                       name="student"
                       render={(arrayHelpers) => {
@@ -154,47 +159,86 @@ const GroupEditPage: FC = observer(() => {
                         });
                       }}
                     /> */}
-                    <FieldArray
-                      name="student"
-                      render={(helper) => {
 
-                        return (
-                          <>
-                            {group?.student.map(
-                              ({
-                                id,
-                                patronymic,
-                                last_name,
-                                fist_name,
-                                birthday,
-                                email,
-                                telephone,
-                                place_residence,
-                                place_registration,
-                              }) => {
-                                return (
-                                  <GroupBody
-                                    mutateFn={mutateFn}
-                                    key={id}
-                                    groupId={groupId}
-                                    id={id}
-                                    patronymic={patronymic}
-                                    last_name={last_name}
-                                    fist_name={fist_name}
-                                    birthday={birthday}
-                                    email={email}
-                                    telephone={telephone}
-                                    place_residence={place_residence}
-                                    place_registration={place_registration}
-                                    studentIds={studentIds}
-                                  />
-                                );
+                    {!groupId ? (
+                      <FieldArray
+                        name="student"
+                        render={(arrayHelpers) => {
+                          return arrayHelpers.form.values.student?.map(
+                            (el: any, i: number) => {
+                              if (!el) {
+                                return null
                               }
-                            )}
-                          </>
-                        );
-                      }}
-                    />
+                              // debugger
+                              console.log('arrayHelpers', arrayHelpers);
+                              return (
+                                <>
+                                  <GroupBody
+                                    key={el?.id}
+                                    groupId={groupId}
+                                    arrayHelpers={arrayHelpers}
+                                    id={el?.id}
+                                    index={i}
+                                    patronymic={el?.patronymic}
+                                    last_name={el?.last_name}
+                                    fist_name={el?.fist_name}
+                                    birthday={el?.birthday}
+                                    email={el?.email}
+                                    telephone={el?.telephone}
+                                    place_residence={el?.place_residence}
+                                    place_registration={el?.place_registration}
+                                    studentIds={el?.studentIds}
+                                  />
+                                </>
+                              );
+                            }
+                          );
+                        }}
+                      />
+                    ) : null}
+
+                    {groupId && (
+                      <FieldArray
+                        name="student"
+                        render={(helper) => {
+                          return (
+                            <>
+                              {group?.student.map(
+                                ({
+                                  id,
+                                  patronymic,
+                                  last_name,
+                                  fist_name,
+                                  birthday,
+                                  email,
+                                  telephone,
+                                  place_residence,
+                                  place_registration,
+                                }) => {
+                                  return (
+                                    <GroupBody
+                                      mutateFn={mutateFn}
+                                      key={id}
+                                      groupId={groupId}
+                                      id={id}
+                                      patronymic={patronymic}
+                                      last_name={last_name}
+                                      fist_name={fist_name}
+                                      birthday={birthday}
+                                      email={email}
+                                      telephone={telephone}
+                                      place_residence={place_residence}
+                                      place_registration={place_registration}
+                                      studentIds={studentIds}
+                                    />
+                                  );
+                                }
+                              )}
+                            </>
+                          );
+                        }}
+                      />
+                    )}
                   </Tbody>
                 </Table>
               </TableContainer>

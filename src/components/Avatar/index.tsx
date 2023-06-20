@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite"
 const Avatar = observer(() => {
   const nav = useNavigate()
   const { ModalStore } = useStores()
-  console.log(userStore);
+  // console.log(userStore);
   
   const logOut = () => {
     userStore.logout(() => {

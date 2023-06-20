@@ -12,8 +12,20 @@ import { loginSchema } from "@/utils/schemas/login-schema";
 import { AuthApi } from "@/api/services/auth";
 
 import AuthView from "@/views/Auth";
+import { useStores } from "@/hooks/useStore";
+
+const getErr = (string: string) => {
+  const obj = {
+    'Firebase: Error (auth/user-not-found).': 'Не существует такого юзера',
+    'Firebase: Error (auth/wrong-password).': 'Не правильный пароль'
+  }
+
+  return obj[string] || 'что то не так'
+}
 
 const Auth: FC = observer(() => {
+  const store = useStores()
+
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -28,8 +40,9 @@ const Auth: FC = observer(() => {
         () => {
           navigate("/");
         },
-        () => {
-          console.log("err");
+        (err) => {
+          store.ModalStore.open('error', {text: getErr(err.message)})
+          console.log(err.message);
         }
       );
     },

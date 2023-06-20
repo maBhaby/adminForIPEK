@@ -1,4 +1,4 @@
-import { IModalsBase } from '@/interfaces'
+import { IModalsBase } from "@/interfaces";
 import {
   Modal,
   ModalOverlay,
@@ -7,32 +7,33 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button
-} from '@chakra-ui/react'
-import { FC } from 'react'
+  Button,
+} from "@chakra-ui/react";
+import { FC } from "react";
 
-interface IUserDataModal extends IModalsBase {
-}
+interface IUserDataModal extends IModalsBase {}
 
 const ErrorModal: FC<IUserDataModal> = ({ closeModal, isOpen, modalProps }) => {
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Уведомление</ModalHeader>
+        <ModalHeader>Ошибка</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          Что то пошло не так. Пожалуйста попробуйте позже
+          {modalProps?.text
+            ? modalProps?.text
+            : "Что то пошло не так. Пожалуйста попробуйте позже"}
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme='blue' onClick={closeModal}>
+          <Button colorScheme="blue" onClick={closeModal}>
             Закрыть
           </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
-  )
-}
+  );
+};
 
-export default ErrorModal
+export default ErrorModal;

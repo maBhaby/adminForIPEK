@@ -22,7 +22,7 @@ const Product: FC<IProductView> = ({ formikTools }) => {
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     formikTools
 
-  console.log(formikTools)
+  // console.log(formikTools)
   const inputs = [
     {
       title: 'Название',

@@ -44,7 +44,6 @@ class ColleagueApiService extends BaseApi {
   }
 
   changeColleague = async (id: number, value: any): Promise<IColleagueApi> => {
-    debugger
     const res = await this.axios.put<IColleagueApi>(`api/v1/colleaguelist/${id}`, value)
     return res.data
   }

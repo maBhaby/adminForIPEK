@@ -47,7 +47,7 @@ const Create: FC<IUserDataModal> = ({ closeModal, isOpen, modalProps }) => {
   );
 
   const [defData, setDefData] = useState({});
-  console.log(modalProps);
+  // console.log(modalProps);
 
   const formik = useFormik({
     initialValues: defData,
@@ -60,12 +60,13 @@ const Create: FC<IUserDataModal> = ({ closeModal, isOpen, modalProps }) => {
           }
         })
       const mapFilter = filterStud.map((el: any) => el.id);
-      console.log(filterStud);
+      // console.log(filterStud);
       if (modalProps.id) {
         groupsApiService.changeGroupStud(modalProps.id, { student: [...modalProps?.studentId, ...mapFilter]});
         modalProps.mutateFn()
+      } else {  
+        addStudentToGroupForm(mapFilter, modalProps.formikTools) 
       }
-      addStudentToGroupForm(mapFilter, modalProps.formikTools) 
       closeModal()
     },
   });
@@ -86,10 +87,9 @@ const Create: FC<IUserDataModal> = ({ closeModal, isOpen, modalProps }) => {
 
   const { values, handleSubmit, handleBlur, handleChange, setFieldValue, isSubmitting } =
     formik;
-  console.log(formik);
+  // console.log(formik);
 
   const handleChangeCheckbox = (e: any, i: any) => {
-    debugger;
     setFieldValue(`students[${i}].inGroup`, e.target.checked);
   };
 

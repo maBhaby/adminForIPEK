@@ -32,7 +32,7 @@ const CreatePosts: FC<IUserDataModal> = ({
     "api/v1/Colleaguelist/",
     ColleagueApi.getPositions
   );
-  console.log(data);
+  // console.log(data);
 
   const formik = useFormik({
     initialValues: {
@@ -40,17 +40,16 @@ const CreatePosts: FC<IUserDataModal> = ({
     },
     validationSchema: CreatePostShema,
     onSubmit: (value) => {
-      debugger;
       ColleagueApi.setPosition(value)
         .then((res) => {
           setIsCreate(true);
           setTimeout(() => {
             setIsCreate(false);
           }, 3000);
-          console.log(res);
+          // console.log(res);
         })
         .catch((res) => {
-          console.log(res);
+          // console.log(res);
         });
     },
   });
@@ -58,7 +57,7 @@ const CreatePosts: FC<IUserDataModal> = ({
   if (isLoading) return <Loader />;
 
   const { values, handleSubmit, handleBlur, handleChange, errors, touched } = formik;
-  console.log(formik);
+  // console.log(formik);
 
   return (
     <form>

@@ -17,7 +17,7 @@ class SpecialitysApiService extends BaseApi {
       const res = await this.axios.get<ISpecialitys>('api/v1/specialitylist/')
       return res.data
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
 
@@ -26,7 +26,7 @@ class SpecialitysApiService extends BaseApi {
       const res = await this.axios.get<ISpecialitys>(`api/v1/specialitylist/${count}`)
       return res.data
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
 }

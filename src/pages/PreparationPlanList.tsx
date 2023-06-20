@@ -26,7 +26,7 @@ const PreparationPlanList = () => {
     'getPreparationPlan',
     ColleagueApi.getPreparationPlanList
   )
-  console.log(data);
+  // console.log(data);
   
   const preparationPlans = data?.PreparationPlan
   const navigate = useNavigate()

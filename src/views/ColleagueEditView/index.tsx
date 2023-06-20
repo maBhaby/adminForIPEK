@@ -41,7 +41,7 @@ const inputs = [
 
 const ColleagueEditView: FC<IProp> = ({ formik, handleOpenModal }) => {
   const { handleBlur, handleChange, values, errors, touched } = formik
-  console.log(formik)
+  // .consolelog(formik)
 
   return (
     <Box

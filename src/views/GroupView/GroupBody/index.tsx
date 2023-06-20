@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { FieldArrayRenderProps } from 'formik'
+
 import { groupsApiService } from '@/api/services/groups'
 import { observer } from 'mobx-react-lite'
 
@@ -45,7 +47,9 @@ const content = [
 interface IGroupBody extends Student {
   studentIds?: Array<number>
   groupId: number | null
+  arrayHelpers: FieldArrayRenderProps
   mutateFn: () => void
+  index: number
 }
 
 const GroupBody: FC<IGroupBody> = observer(({
@@ -53,6 +57,7 @@ const GroupBody: FC<IGroupBody> = observer(({
   last_name,
   fist_name,
   birthday,
+  index,
   email,
   telephone,
   place_registration,
@@ -60,6 +65,7 @@ const GroupBody: FC<IGroupBody> = observer(({
   id,
   studentIds,
   groupId,
+  arrayHelpers,
   mutateFn
 }) => {
   const contentForTooltip = {
@@ -69,10 +75,14 @@ const GroupBody: FC<IGroupBody> = observer(({
     place_residence
   }
   
+  // debugger
+
   const handleDeletUser = () => {
     if (groupId) {
       groupsApiService.changeGroupStud(groupId, { student:studentIds?.filter((el) => el !== id)})
       mutateFn()
+    } else {
+      arrayHelpers.remove(index)
     }
   }
   return (

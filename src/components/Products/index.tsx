@@ -14,7 +14,7 @@ const Products: FC = () => {
     redirect(`${ROUTER_PATHS.PRODUCTS}${id}`, { state: { id } })
   }
 
-  console.log(isLoading)
+  // console.log(isLoading)
   if (isLoading) {
     return <Loader />
   }

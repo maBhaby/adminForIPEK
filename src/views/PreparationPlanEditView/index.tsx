@@ -29,7 +29,7 @@ const inputs = [
 
 const PreparationPlanEditView: FC<IProp> = ({ formik }) => {
   const { handleBlur, handleChange, values, errors, touched } = formik
-  console.log(formik)
+  // console.log(formik)
 
   return (
     <Box

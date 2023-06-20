@@ -25,14 +25,14 @@ class User {
     try {
       signInWithEmailAndPassword(auth, email, password)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           this.user = {
             email: response.user.email
           }
           after()
         })
         .catch((res) => {
-          err()
+          err(res)
         })
     } catch (e: any) {
       throw new Error(e)

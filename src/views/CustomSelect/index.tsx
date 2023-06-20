@@ -17,7 +17,7 @@ const CustomSelect: FC<any> = ({
   renderName = 'name'
 }) => {
   const { data, isLoading, mutate } = useSWR(`${apiGet}/test`, apiGet);
-  console.log(data);
+  // console.log(data);
 
   const handleDelete = async () => {
     await apiDel(value);

@@ -62,7 +62,6 @@ class StudentApiService extends BaseApi {
   }
 
   public createStudent = async (body: IStudent | any): Promise<any> => {
-    debugger
     const res = await this.axios.post('api/v1/studentlist/', body)
     return res
   }
