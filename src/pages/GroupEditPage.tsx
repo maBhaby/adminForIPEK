@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { groupsApiService } from "@/api/services/groups";
 import useSWR from "swr";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Loader from "@/views/Loader";
 import Title from "@/views/GroupEditView/Title";
 import {
@@ -39,7 +39,7 @@ const initialValuesFormik: IValue = {
   colleague: 1,
   form_education: "Очная",
   number: "404",
-  plan: "СПО",
+  plan: 1,
   school_graduation_class: "9",
   speciality: 1,
   year_receipt: "",
@@ -49,6 +49,7 @@ const initialValuesFormik: IValue = {
 const GroupEditPage: FC = observer(() => {
   const { ModalStore } = useStores();
   const location = useLocation();
+  const navigate = useNavigate()
   const searchParams = new URLSearchParams(location.search);
   const groupId = searchParams.get("id");
 
@@ -80,6 +81,7 @@ const GroupEditPage: FC = observer(() => {
         await groupsApiService.createGroup(serData);
       }
       ModalStore.open("notification", { text: "Успешно" });
+      navigate('/group')
     } catch (error) {
       ModalStore.open("error");
     }
@@ -152,37 +154,47 @@ const GroupEditPage: FC = observer(() => {
                         });
                       }}
                     /> */}
-                    {group?.student.map(
-                      ({
-                        id,
-                        patronymic,
-                        last_name,
-                        fist_name,
-                        birthday,
-                        email,
-                        telephone,
-                        place_residence,
-                        place_registration,
-                      }) => {
+                    <FieldArray
+                      name="student"
+                      render={(helper) => {
+
                         return (
-                          <GroupBody
-                            mutateFn={mutateFn}
-                            key={id}
-                            groupId={groupId}
-                            id={id}
-                            patronymic={patronymic}
-                            last_name={last_name}
-                            fist_name={fist_name}
-                            birthday={birthday}
-                            email={email}
-                            telephone={telephone}
-                            place_residence={place_residence}
-                            place_registration={place_registration}
-                            studentIds={studentIds}
-                          />
+                          <>
+                            {group?.student.map(
+                              ({
+                                id,
+                                patronymic,
+                                last_name,
+                                fist_name,
+                                birthday,
+                                email,
+                                telephone,
+                                place_residence,
+                                place_registration,
+                              }) => {
+                                return (
+                                  <GroupBody
+                                    mutateFn={mutateFn}
+                                    key={id}
+                                    groupId={groupId}
+                                    id={id}
+                                    patronymic={patronymic}
+                                    last_name={last_name}
+                                    fist_name={fist_name}
+                                    birthday={birthday}
+                                    email={email}
+                                    telephone={telephone}
+                                    place_residence={place_residence}
+                                    place_registration={place_registration}
+                                    studentIds={studentIds}
+                                  />
+                                );
+                              }
+                            )}
+                          </>
                         );
-                      }
-                    )}
+                      }}
+                    />
                   </Tbody>
                 </Table>
               </TableContainer>

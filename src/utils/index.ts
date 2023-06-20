@@ -3,6 +3,7 @@ import { studentApiService } from "@/api/services/student"
 
 export const groupEditSerializer = (data: any) => {
   const studentIds = data?.student.map((el:any) => el.id)
+  debugger
   return {
     ...data,
     speciality: +data.speciality,
